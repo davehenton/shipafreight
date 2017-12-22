@@ -1,0 +1,29 @@
+.field {
+  width: 300px;
+  padding: 0 15px;
+}
+.field-wrapper {
+  border-radius: 5px;
+  border: 2px solid rgb(221, 221, 221);
+  position: relative;
+  height: 50px;
+  display: flex;
+}
+.field-section {
+  position: relative;
+  border-right: 2px solid rgb(221, 221, 221);
+  flex-grow: 1;
+}
+.field-section:last-child {
+  border-right: none;
+}
+.field-label {
+  color: rgb(153, 153, 153);
+  font-size: 12px;
+  font-weight: 400;
+  top: -8px;
+  left: 13px;
+  position: absolute;
+  background-color: white;
+  padding: 0 5px 0 3px;
+}

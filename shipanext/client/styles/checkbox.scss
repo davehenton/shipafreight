@@ -1,0 +1,17 @@
+.checkbox {
+  background: transparent;
+  box-shadow: none;
+  color: #333333;
+  text-transform: none;
+  display: flex;
+}
+.checkbox-icon {
+  background: url(../checkboxs_and_radiobuttons.svg) no-repeat;
+  width: 18px;
+  height: 18px;
+  background-position: 1px 1px;
+  margin-right: 14px;
+}
+.checkbox-icon.checked {
+  background-position: -35px 1px;
+}

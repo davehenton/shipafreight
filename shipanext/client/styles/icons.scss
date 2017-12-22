@@ -1,0 +1,15 @@
+.icon {
+  background: url(../landing-sprite.svg) no-repeat 0 -4px;
+  position: inherit;
+  width: 32px;
+  height: 32px;
+  content: '';
+  margin-right: 6px;
+  color: #333333;
+}
+.icon.ocean {
+  background-position: 0 -40px;
+}
+.icon.air {
+  background-position: -32px -40px;
+}

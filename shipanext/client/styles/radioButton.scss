@@ -1,0 +1,24 @@
+.radio-button-group {
+  display: flex;
+}
+.radio-button {
+  border: none;
+  box-shadow: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  color: #333333;
+  text-transform: none;
+  margin-right: 25px;
+}
+.radio-button-icon {
+  background: url(../checkboxs_and_radiobuttons.svg) no-repeat;
+  width: 18px;
+  height: 18px;
+  background-position: -89px 1px;
+  margin-right: 14px;
+}
+.radio-button-icon.checked {
+  background-position: -125px 1px;
+}
