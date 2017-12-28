@@ -1,6 +1,7 @@
 {
   "name": "shipafreight-test",
   "version": "0.1.0",
+  "private": true,
   "scripts": {
     "unit": "jest --config=jest.config.json",
     "unit-ci": "jest --config=jest.config.json",
