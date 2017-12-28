@@ -11,24 +11,18 @@ import * as AT from '../../state/actionTypes';
 describe('ContainerRowConnect.js', () => {
   describe('getPackageTypeOptions Function', () => {
     it('returns all options if there is only one cargo row', () => {
-      const quoteForm = { cargoRows: [1] };
-      expect(CRC.getPackageTypeOptions(quoteForm)).toEqual(
+      expect(CRC.getPackageTypeOptions(1)).toEqual(
         OPTS.PACKAGE_TYPE_OPTIONS_WITH_CONTAINERS
       );
-      quoteForm.cargoRows = [1, 2];
-      expect(CRC.getPackageTypeOptions(quoteForm)).toEqual(
+      expect(CRC.getPackageTypeOptions(2)).toEqual(
         OPTS.PACKAGE_TYPE_OPTIONS_CONTAINERS_ONLY
       );
     });
   });
-  describe('getAddOrRemovePackageRowButtonClass Function', () => {
+  describe('getAddOrRemoveCargoRowButtonClass Function', () => {
     it('returns add-row if index is 0', () => {
-      const ownProps = { index: 0 };
-      expect(CRC.getAddOrRemovePackageRowButtonClass(ownProps)).toBe('add-row');
-      ownProps.index = 1;
-      expect(CRC.getAddOrRemovePackageRowButtonClass(ownProps)).toBe(
-        'remove-row'
-      );
+      expect(CRC.getAddOrRemoveCargoRowButtonClass(0)).toBe('add-row');
+      expect(CRC.getAddOrRemoveCargoRowButtonClass(1)).toBe('remove-row');
     });
   });
   describe('mapStateToProps Function', () => {
@@ -48,16 +42,16 @@ describe('ContainerRowConnect.js', () => {
       expect(dispatch).toHaveBeenCalledTimes(3);
     });
   });
-  describe('getAddOrRemovePackageRow Function', () => {
+  describe('getAddOrRemoveCargoRow Function', () => {
     it('dispatches and add row action if index is 0 and remove row otherwise', () => {
       const dispatch = jest.fn();
       let index = 0;
-      CRC.getAddOrRemovePackageRow(dispatch, index)();
+      CRC.getAddOrRemoveCargoRow(dispatch, index)();
       let type = dispatch.mock.calls[0][0].type;
       expect(type).toBe(AT.ADD_QUOTE_FORM_CARGO_ROW);
 
       index = 1;
-      CRC.getAddOrRemovePackageRow(dispatch, index)();
+      CRC.getAddOrRemoveCargoRow(dispatch, index)();
       type = dispatch.mock.calls[1][0].type;
       expect(type).toBe(AT.REMOVE_QUOTE_FORM_CARGO_ROW);
     });

@@ -17,23 +17,21 @@ import ContainerRowDisplay from './ContainerRowDisplay';
 import * as OPTS from '../options';
 
 // Only display all options for package if there is a single row of cargo
-export const getPackageTypeOptions = quoteForm =>
-  quoteForm.cargoRows.length === 1
+export const getPackageTypeOptions = length =>
+  length === 1
     ? OPTS.PACKAGE_TYPE_OPTIONS_WITH_CONTAINERS
     : OPTS.PACKAGE_TYPE_OPTIONS_CONTAINERS_ONLY;
 
 // Set the button class to 'add-row' on the first row and 'remove-row' otherwise
-export const getAddOrRemovePackageRowButtonClass = ownProps =>
-  ownProps.index === 0 ? 'add-row' : 'remove-row';
+export const getAddOrRemoveCargoRowButtonClass = index =>
+  index === 0 ? 'add-row' : 'remove-row';
 
 // Extract the correct cargo row from the quote form and set some presentational
 // properties
-export const mapStateToProps = ({ quoteForm }, ownProps) => ({
-  ...quoteForm.cargoRows[ownProps.index],
-  packageTypeOptions: getPackageTypeOptions(quoteForm),
-  addOrRemovePackageRowButtonClass: getAddOrRemovePackageRowButtonClass(
-    ownProps
-  ),
+export const mapStateToProps = ({ quoteForm: { cargoRows } }, { index }) => ({
+  ...cargoRows[index],
+  packageTypeOptions: getPackageTypeOptions(cargoRows.length),
+  addOrRemoveCargoRowButtonClass: getAddOrRemoveCargoRowButtonClass(index),
 });
 
 // Changes the packageType to the selected value. If something other than
@@ -47,7 +45,7 @@ export const getSetPackageType = (dispatch, index) => val => {
 };
 
 // The button on the first row should add rows, and the rest should remove rows
-export const getAddOrRemovePackageRow = (dispatch, index) =>
+export const getAddOrRemoveCargoRow = (dispatch, index) =>
   index === 0
     ? () => dispatch(addQuoteFormCargoRow())
     : () => dispatch(removeQuoteFormCargoRow(index));
@@ -64,7 +62,7 @@ export const mapDispatchToProps = (dispatch, { index }) => ({
   setContainerType: getDispatcher(dispatch, index, 'containerType'),
   setWeightUOM: getDispatcher(dispatch, index, 'weightUOM'),
   setWeightPerPiece: getDispatcher(dispatch, index, 'weightPerPiece'),
-  addOrRemovePackageRow: getAddOrRemovePackageRow(dispatch, index),
+  addOrRemoveCargoRow: getAddOrRemoveCargoRow(dispatch, index),
 });
 
 const ContainerRowConnect = connect(mapStateToProps, mapDispatchToProps)(

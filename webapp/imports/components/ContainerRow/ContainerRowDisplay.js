@@ -62,8 +62,8 @@ const ContainerRowDisplay = props => (
       </div>
     </div>
     <button
-      className={props.addOrRemovePackageRowButtonClass}
-      onClick={props.addOrRemovePackageRow}
+      className={props.addOrRemoveCargoRowButtonClass}
+      onClick={props.addOrRemoveCargoRow}
     >
       <div className="icon" />
     </button>

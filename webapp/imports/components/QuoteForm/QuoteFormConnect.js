@@ -1,60 +1,160 @@
+// QuoteFormConnect.js
+// Smart component connecting the state and props to the QuoteFormDisplay
+// presentational component. Represents the top-level fields of the quote form.
+
 import { connect } from 'react-redux';
+import React from 'react';
 
 import { setQuoteFormProp } from '../../state/actionCreators';
 import QuoteFormDisplay from './QuoteFormDisplay';
-import { maybe } from '../utils';
+import PackageRow from '../PackageRow';
+import ContainerRow from '../ContainerRow';
+import HazardousModal from '../HazardousModal';
+import HouseholdGoodsModal from '../HouseholdGoodsModal';
 
-export const mapStateToProps = ({ quoteForm }) => {
-  const props = { ...quoteForm };
-  props.oceanButtonClass = props.modeOfTransport === 'Ocean' ? 'active' : '';
-  props.airButtonClass = props.modeOfTransport === 'Air' ? 'active' : '';
-  props.isUsingDimsClass = props.isUsingDims ? 'active' : '';
-  props.isHazardousClass = props.isHazardous ? 'active' : '';
-  props.isHouseholdGoodsClass = props.isHouseholdGoods ? 'active' : '';
-  props.isInsuranceRequiredClass = props.isInsuranceRequired ? 'active' : '';
-  return props;
+// Compare a property to a value to see if it should be given the active CSS
+// class
+export const getActiveClass = (prop, value) => (prop === value ? 'active' : '');
+
+// Use a location if it is Door to * movement, and port/airport otherwise
+export const getOriginLocationField = (modeOfTransport, movementType) =>
+  movementType === 'DOOR_TO_DOOR' || movementType === 'DOOR_TO_PORT'
+    ? 'LOCATION'
+    : modeOfTransport === 'Ocean' ? 'PORT' : 'AIRPORT';
+
+// Use a location if it is * to Door movement, and port/airport otherwise
+export const getDestinationLocationField = (modeOfTransport, movementType) =>
+  movementType === 'DOOR_TO_DOOR' || movementType === 'PORT_TO_DOOR'
+    ? 'LOCATION'
+    : modeOfTransport === 'Ocean' ? 'PORT' : 'AIRPORT';
+
+export const getCargoRows = (cargoRows, isContainerCargo) =>
+  isContainerCargo
+    ? cargoRows.map((_, index) => <ContainerRow key={index} index={index} />)
+    : cargoRows.map((_, index) => <PackageRow key={index} index={index} />);
+
+export const getWeightAndCBMTotalsClass = isContainerCargo =>
+  isContainerCargo ? 'hide' : 'show';
+
+export const getWeightTotalClass = isContainerCargo =>
+  isContainerCargo ? 'show' : 'hide';
+
+export const getRevenueTonsClass = (modeOfTransport, isContainerCargo) =>
+  modeOfTransport === 'Ocean' && !isContainerCargo ? 'show' : 'hide';
+
+export const getChargeableAndVolumetricWeightClass = modeOfTransport =>
+  modeOfTransport === 'Air' ? 'show' : 'hide';
+
+export const getHazardousClassClass = hazardousClass =>
+  hazardousClass !== '' ? 'show' : 'hide';
+
+export const getInsuranceRequiredFieldsClass = isInsuranceRequired =>
+  isInsuranceRequired ? 'show' : 'hide';
+
+export const getModal = (showHazardousModal, isHouseholdGoods) =>
+  showHazardousModal ? (
+    <HazardousModal />
+  ) : isHouseholdGoods ? (
+    <HouseholdGoodsModal />
+  ) : null;
+
+// Map the quote form and properties for the presentational component
+export const mapStateToProps = ({
+  quoteForm,
+  quoteForm: {
+    modeOfTransport,
+    movementType,
+    cargoRows,
+    isContainerCargo,
+    isHazardous,
+    hazardousClass,
+    showHazardousModal,
+    isHouseholdGoods,
+    isInsuranceRequired,
+  },
+}) => ({
+  ...quoteForm,
+  oceanButtonClass: getActiveClass(modeOfTransport, 'Ocean'),
+  airButtonClass: getActiveClass(modeOfTransport, 'Air'),
+  originLocationField: getOriginLocationField(modeOfTransport, movementType),
+  destinationLocationField: getDestinationLocationField(
+    modeOfTransport,
+    movementType
+  ),
+  isHazardousClass: getActiveClass(isHazardous, true),
+  isHouseholdGoodsClass: getActiveClass(isHouseholdGoods, true),
+  isInsuranceRequiredClass: getActiveClass(isInsuranceRequired, true),
+  CargoRows: getCargoRows(cargoRows, isContainerCargo),
+  weightAndCBMTotalsClass: getWeightAndCBMTotalsClass(isContainerCargo),
+  weightTotalClass: getWeightTotalClass(isContainerCargo),
+  revenueTonsClass: getRevenueTonsClass(modeOfTransport, isContainerCargo),
+  chargeableAndVolumetricWeightClass: getChargeableAndVolumetricWeightClass(
+    modeOfTransport
+  ),
+  hazardousClassClass: getHazardousClassClass(hazardousClass),
+  insuranceRequiredFieldsClass: getInsuranceRequiredFieldsClass(
+    isInsuranceRequired
+  ),
+  modal: getModal(showHazardousModal, isHouseholdGoods),
+});
+
+// Generic dispatcher generator for setting cargo row properties on the quote
+// form
+export const getDispatcher = (dispatch, prop) => val =>
+  dispatch(setQuoteFormProp(prop, val));
+
+// Generic dispatcher with preset values for setting cargo row properties on the
+// quote form
+export const getPresetValueDispatcher = (dispatch, prop) => val => () =>
+  dispatch(setQuoteFormProp(prop, val));
+
+// Dispatcher that sets isHazardous. If it is being set to true, then open the
+// modal dialog. If it is being set to false, then clear the hazardousClass
+// value.
+export const getSetIsHazardous = dispatch => value => () => {
+  dispatch(setQuoteFormProp('isHazardous', value));
+  if (value) {
+    dispatch(setQuoteFormProp('showHazardousModal', value));
+  } else {
+    dispatch(setQuoteFormProp('hazardousClass', ''));
+  }
 };
 
-export const mapDispatchToProps = dispatch => {
-  const dis = prop => val => dispatch(setQuoteFormProp(prop, val));
-  const toggle = prop => val => () => dispatch(setQuoteFormProp(prop, val));
-  return {
-    setModeToOcean: () =>
-      dispatch(setQuoteFormProp('modeOfTransport', 'Ocean')),
-    setModeToAir: () => dispatch(setQuoteFormProp('modeOfTransport', 'Air')),
-    setMovementType: dis('movementType'),
-    setOriginCountry: dis('originCountry'),
-    setDepartureAirport: dis('departureAirport'),
-    setDepartureSeaport: dis('departureSeaport'),
-    setPickupLocation: dis('pickupLocation'),
-    setDestinationCountry: dis('destinationCountry'),
-    setArrivalAirport: dis('arrivalAirport'),
-    setArrivalSeaport: dis('arrivalSeaport'),
-    setDeliveryLocation: dis('deliveryLocation'),
-    setPackageType: dis('packageType'),
-    setQuantity: dis('quantity'),
-    setDimensionsUOM: dis('dimensionsUOM'),
-    setLength: dis('length'),
-    setWidth: dis('width'),
-    setHeight: dis('height'),
-    setVolume: dis('volume'),
-    setWeightUOM: dis('weightUOM'),
-    setWeightPerPiece: dis('weightPerPiece'),
-    setDescription: dis('description'),
-    setPreferredCurrency: dis('preferredCurrency'),
-    setIsHazardous: value => () => {
-      dispatch(setQuoteFormProp('isHazardous', value));
-      dispatch(setQuoteFormProp('showHazardousModal', value));
-      if (!value) {
-        dispatch(setQuoteFormProp('hazardousClass', ''));
-      }
-    },
-    setIsHouseholdGoods: toggle('isHouseholdGoods'),
-    setIsInsuranceRequired: toggle('isInsuranceRequired'),
-    setCargoValue: dis('cargoValue'),
-    setCargoValueCurrency: dis('cargoValueCurrency'),
-  };
-};
+// Map dispatchers
+export const mapDispatchToProps = dispatch => ({
+  setModeToOcean: getPresetValueDispatcher(dispatch, 'modeOfTransport')(
+    'Ocean'
+  ),
+  setModeToAir: getPresetValueDispatcher(dispatch, 'modeOfTransport')('Air'),
+  setMovementType: getDispatcher(dispatch, 'movementType'),
+  setOriginCountry: getDispatcher(dispatch, 'originCountry'),
+  setDepartureAirport: getDispatcher(dispatch, 'departureAirport'),
+  setDepartureSeaport: getDispatcher(dispatch, 'departureSeaport'),
+  setPickupLocation: getDispatcher(dispatch, 'pickupLocation'),
+  setDestinationCountry: getDispatcher(dispatch, 'destinationCountry'),
+  setArrivalAirport: getDispatcher(dispatch, 'arrivalAirport'),
+  setArrivalSeaport: getDispatcher(dispatch, 'arrivalSeaport'),
+  setDeliveryLocation: getDispatcher(dispatch, 'deliveryLocation'),
+  setPackageType: getDispatcher(dispatch, 'packageType'),
+  setQuantity: getDispatcher(dispatch, 'quantity'),
+  setDimensionsUOM: getDispatcher(dispatch, 'dimensionsUOM'),
+  setLength: getDispatcher(dispatch, 'length'),
+  setWidth: getDispatcher(dispatch, 'width'),
+  setHeight: getDispatcher(dispatch, 'height'),
+  setVolume: getDispatcher(dispatch, 'volume'),
+  setWeightUOM: getDispatcher(dispatch, 'weightUOM'),
+  setWeightPerPiece: getDispatcher(dispatch, 'weightPerPiece'),
+  setDescription: getDispatcher(dispatch, 'description'),
+  setPreferredCurrency: getDispatcher(dispatch, 'preferredCurrency'),
+  setIsHazardous: getSetIsHazardous(dispatch),
+  setIsHouseholdGoods: getPresetValueDispatcher(dispatch, 'isHouseholdGoods'),
+  setIsInsuranceRequired: getPresetValueDispatcher(
+    dispatch,
+    'isInsuranceRequired'
+  ),
+  setCargoValue: getDispatcher(dispatch, 'cargoValue'),
+  setCargoValueCurrency: getDispatcher(dispatch, 'cargoValueCurrency'),
+});
 
 const QuoteFormConnect = connect(mapStateToProps, mapDispatchToProps)(
   QuoteFormDisplay

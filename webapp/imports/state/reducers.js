@@ -28,9 +28,7 @@ export const getVolume = ({ quantity, length, width, height, dimensionsUOM }) =>
     : 0;
 
 export const getWeightTotal = ({ quantity, weightPerPiece }) =>
-  quantity && weightPerPiece
-    ? Math.round(quantity * weightPerPiece * 100) / 100
-    : 0;
+  quantity && weightPerPiece ? quantity * weightPerPiece : 0;
 
 const CONVERT_WEIGHT = {
   KG: 1,
@@ -41,9 +39,8 @@ const CONVERT_WEIGHT = {
 export const getWeightInKG = ({ cargoRows }) =>
   cargoRows.reduce(
     (prev, { quantity, weightUOM, weightPerPiece }) =>
-      weightPerPiece
-        ? prev +
-          (quantity || 1) * weightPerPiece * (CONVERT_WEIGHT[weightUOM] || 1)
+      quantity && weightPerPiece
+        ? prev + quantity * weightPerPiece * CONVERT_WEIGHT[weightUOM]
         : prev,
     0
   );
@@ -102,15 +99,14 @@ export const setIsContainerCargo = (state, action) => {
   if (action.isContainerCargo) {
     newState = _.set('cargoRows', [CONTAINER_ROW_DEFAULT_STATE], state);
     newState = _.set('isContainerCargo', true, newState);
-    return newState;
   } else {
     newState = _.set('cargoRows', [PACKAGE_ROW_DEFAULT_STATE], state);
     newState = _.set('isContainerCargo', false, newState);
-    return newState;
   }
+  return newState;
 };
 
-const CONTAINER_ROW_DEFAULT_STATE = {
+export const CONTAINER_ROW_DEFAULT_STATE = {
   packageType: 'CONTAINERS',
   quantity: 1,
   containerType: '20GP',
@@ -119,7 +115,7 @@ const CONTAINER_ROW_DEFAULT_STATE = {
   weightTotal: 0,
 };
 
-const PACKAGE_ROW_DEFAULT_STATE = {
+export const PACKAGE_ROW_DEFAULT_STATE = {
   packageType: 'PACKAGES',
   quantity: 1,
   isUsingDims: true,
@@ -148,6 +144,8 @@ const QUOTE_FORM_DEFAULT_STATE = {
   isContainerCargo: false,
   description: '',
   isHazardous: false,
+  hazardousClass: '',
+  showHazardousModal: false,
   isHouseholdGoods: false,
   isInsuranceRequired: false,
   preferredCurrency: 'USD',

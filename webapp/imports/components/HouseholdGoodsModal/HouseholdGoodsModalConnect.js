@@ -7,9 +7,10 @@ export const mapStateToProps = ({ quoteForm: { isHouseholdGoods } }) => ({
   isHouseholdGoods,
 });
 
-export const mapDispatchToProps = dispatch => ({
-  ok: () => dispatch(setQuoteFormProp('isHouseholdGoods', false)),
-});
+export const getOk = dispatch => () =>
+  dispatch(setQuoteFormProp('isHouseholdGoods', false));
+
+export const mapDispatchToProps = dispatch => ({ ok: getOk(dispatch) });
 
 const HouseholdGoodsModalConnect = connect(mapStateToProps, mapDispatchToProps)(
   HouseholdGoodsModalDisplay

@@ -5,6 +5,29 @@ import * as OPTS from '../options';
 import NumberField from '../fields/NumberField';
 import { maxTwoDecimals } from '../utils';
 
+const DimsAppendText = {
+  true: '(uncheck to enter total volume)',
+  false: '(check to calculate by dimensions)',
+};
+
+const DimsLabel = {
+  Ocean: props => (
+    <button
+      className={`checkbox ${props.useDimensionsCheckboxClass}`}
+      onClick={props.toggleIsUsingDims(!props.isUsingDims)}
+    >
+      <div className="checkbox-icon" />
+      <div className="label">
+        Dimensions{' '}
+        <span className="label-append">
+          {DimsAppendText[props.isUsingDims]}
+        </span>
+      </div>
+    </button>
+  ),
+  Air: () => <div className="label">Dimensions</div>,
+};
+
 const PackageRowDisplay = props => (
   <div className="form-row">
     <div className="field package-type">
@@ -13,11 +36,7 @@ const PackageRowDisplay = props => (
         <div className="field-label">* Package type</div>
         <OptionField
           value={props.packageType}
-          options={
-            props.showContainersOption
-              ? OPTS.PACKAGE_TYPE_OPTIONS_WITH_CONTAINERS
-              : OPTS.PACKAGE_TYPE_OPTIONS
-          }
+          options={props.packageTypeOptions}
           onChange={props.setPackageType}
         />
       </div>
@@ -29,37 +48,14 @@ const PackageRowDisplay = props => (
         <NumberField value={props.quantity} onChange={props.setQuantity} />
       </div>
     </div>
-    <div
-      className={`field dimensions ${
-        props.modeOfTransport === 'Ocean' && !props.isUsingDims
-          ? 'disabled'
-          : ''
-      }`}
-    >
-      {props.modeOfTransport === 'Ocean' ? (
-        <button
-          className={`checkbox ${props.isUsingDims ? 'active' : ''}`}
-          onClick={props.toggleIsUsingDims(!props.isUsingDims)}
-        >
-          <div className="checkbox-icon" />
-          <div className="label">
-            Dimensions{' '}
-            <span className="label-append">
-              {props.isUsingDims
-                ? '(uncheck to enter total volume)'
-                : '(check to calculate by dimensions)'}
-            </span>
-          </div>
-        </button>
-      ) : (
-        <div className="label">Dimensions</div>
-      )}
+    <div className={`field dimensions ${props.dimensionsFieldClass}`}>
+      {DimsLabel[props.modeOfTransport](props)}
       <div className="field-wrapper">
         <div className="field-section">
           <div className="field-label">* Unit</div>
           <OptionField
             value={props.dimensionsUOM}
-            disabled={props.modeOfTransport === 'Ocean' && !props.isUsingDims}
+            disabled={props.isDimsFieldDisabled}
             options={OPTS.DIMENSIONS_UOM_OPTIONS}
             onChange={props.setDimensionsUOM}
           />
@@ -69,7 +65,7 @@ const PackageRowDisplay = props => (
           <NumberField
             value={props.length}
             onChange={props.setLength}
-            disabled={props.modeOfTransport === 'Ocean' && !props.isUsingDims}
+            disabled={props.isDimsFieldDisabled}
           />
         </div>
         <div className="field-section">
@@ -77,7 +73,7 @@ const PackageRowDisplay = props => (
           <NumberField
             value={props.width}
             onChange={props.setWidth}
-            disabled={props.modeOfTransport === 'Ocean' && !props.isUsingDims}
+            disabled={props.isDimsFieldDisabled}
           />
         </div>
         <div className="field-section">
@@ -85,25 +81,19 @@ const PackageRowDisplay = props => (
           <NumberField
             value={props.height}
             onChange={props.setHeight}
-            disabled={props.modeOfTransport === 'Ocean' && !props.isUsingDims}
+            disabled={props.isDimsFieldDisabled}
           />
         </div>
       </div>
     </div>
-    <div
-      className={`field volume ${
-        !(props.modeOfTransport === 'Ocean' && !props.isUsingDims)
-          ? 'disabled'
-          : ''
-      }`}
-    >
+    <div className={`field volume ${props.volumeFieldClass}`}>
       <div className="label">Volume</div>
       <div className="field-wrapper">
         <div className="field-label">* CBM</div>
         <NumberField
           value={props.volume}
           onChange={props.setVolume}
-          disabled={!(props.modeOfTransport === 'Ocean' && !props.isUsingDims)}
+          disabled={props.isVolumeFieldDisabled}
         />
       </div>
     </div>
@@ -134,8 +124,8 @@ const PackageRowDisplay = props => (
       </div>
     </div>
     <button
-      className={props.index === 0 ? 'add-row' : 'remove-row'}
-      onClick={props.index === 0 ? props.addPackageRow : props.removePackageRow}
+      className={props.addOrRemoveCargoRowButtonClass}
+      onClick={props.addOrRemoveCargoRow}
     >
       <div className="icon" />
     </button>

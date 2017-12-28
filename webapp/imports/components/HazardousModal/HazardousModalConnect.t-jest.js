@@ -5,7 +5,6 @@ import Adapter from 'enzyme-adapter-react-16';
 Enzyme.configure({ adapter: new Adapter() });
 
 import HazardousModalConnect, * as HMC from './HazardousModalConnect';
-import * as OPTS from '../options';
 import * as AT from '../../state/actionTypes';
 
 describe('HazardousModalConnect.js', () => {

@@ -13,8 +13,7 @@ export const optionRenderer = option => (
       {option.code} – {option.name}
     </span>
     <span className="option-subtext">
-      {option.region ? `${option.region}, ` : ''}
-      {option.country}
+      {option.region ? `${option.region}, ${option.country}` : option.country}
     </span>
   </div>
 );
