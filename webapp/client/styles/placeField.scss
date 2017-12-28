@@ -1,0 +1,29 @@
+.place-field {
+  width: 100%;
+}
+.pac-item {
+  padding: 4px 10px;
+  border: none;
+}
+.pac-item:hover {
+  background-color: rgba(#f08200, 0.05);
+}
+.pac-icon,
+.pac-logo:after {
+  display: none;
+}
+.pac-item-query {
+  font-weight: normal;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  color: lighten(#333, 20%);
+}
+.pac-matched {
+  font-weight: normal;
+}
+.pac-item > span:last-child {
+  font-weight: normal;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  color: #999999;
+}

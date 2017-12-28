@@ -1,0 +1,35 @@
+.tooltip {
+  background-image: url('../landing-sprite.svg');
+  background-position: -24px -74px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  text-align: left;
+}
+.tooltip-text {
+  position: absolute;
+  border: 1px solid #f08200;
+  background-color: lighten(#f08200, 40%);
+  z-index: 1000;
+  left: 40px;
+  width: 300px;
+  font-weight: 300;
+  font-size: 13px;
+  padding: 5px 10px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, visibility 0s 0.3s linear;
+}
+.tooltip:hover .tooltip-text {
+  transition: opacity 0.3s ease-in-out;
+  visibility: visible;
+  opacity: 1;
+}
+.tooltip-text-line {
+  margin-bottom: 10px;
+}
+.tooltip-text-line:last-child {
+  margin-bottom: 0;
+}

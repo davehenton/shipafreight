@@ -7,6 +7,7 @@
 @import 'spinner';
 
 .Select {
+  font-size: $select-value-font-size;
   position: relative;
 
   // disable some browser-specific behaviours that break the input
@@ -103,6 +104,10 @@
         background: $select-input-bg-focus;
       }
     }
+  }
+
+  &.has-value.Select--single.is-disabled > .Select-control .Select-value-label {
+    color: $select-text-color-disabled;
   }
 
   // fake-hide the input when the control is pseudo-focused

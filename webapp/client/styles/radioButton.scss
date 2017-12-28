@@ -19,6 +19,15 @@
   background-position: -89px 1px;
   margin-right: 14px;
 }
+.radio-button:hover .radio-button-icon {
+  background-position: -107px 1px;
+}
 .radio-button.active .radio-button-icon {
   background-position: -125px 1px;
+}
+.radio-button .label {
+  color: #666666;
+}
+.radio-button.active .label {
+  color: #333333;
 }

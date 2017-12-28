@@ -1,0 +1,33 @@
+.hazardous-modal {
+  .radio-button-list,
+  .preview {
+    flex-basis: 50%;
+  }
+  .radio-button-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .radio-button-list .radio-button {
+    padding: 10px 0;
+  }
+  .preview {
+    height: 380px;
+    overflow-y: auto;
+  }
+  .preview .active {
+    display: block;
+  }
+  .preview .inactive {
+    display: none;
+  }
+  .preview .title {
+    font-size: 16px;
+  }
+  .preview .subtitle {
+    font-weight: bold;
+    font-size: 14px;
+  }
+  .preview p {
+    font-size: 14px;
+  }
+}

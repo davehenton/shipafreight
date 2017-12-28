@@ -4,14 +4,21 @@
   color: #333333;
   text-transform: none;
   display: flex;
+  align-items: center;
 }
 .checkbox-icon {
   background: url(../checkboxs_and_radiobuttons.svg) no-repeat;
   width: 18px;
   height: 18px;
-  background-position: 1px 1px;
+  background-position: 0 1px;
   margin-right: 14px;
 }
-.checkbox-icon.checked {
-  background-position: -35px 1px;
+.checkbox:hover .checkbox-icon {
+  background-position: -18px 1px;
+}
+.checkbox.active .checkbox-icon {
+  background-position: -36px 1px;
+}
+.checkbox .label {
+  margin: 0 10px 0 0 !important;
 }

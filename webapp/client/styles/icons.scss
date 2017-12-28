@@ -8,8 +8,14 @@
   color: #333333;
 }
 .icon.ocean {
-  background-position: 0 -40px;
+  background-position: 0 -3px;
 }
 .icon.air {
-  background-position: -32px -40px;
+  background-position: -32px 0px;
+}
+.active .icon.ocean {
+  background-position: 0 -39px;
+}
+.active .icon.air {
+  background-position: -32px -37px;
 }

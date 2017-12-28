@@ -1,13 +1,23 @@
 import React from 'react';
+import { Translate } from 'react-redux-i18n';
+
+import PackageRow from '../PackageRow';
+import ContainerRow from '../ContainerRow';
+import HazardousModal from '../HazardousModal';
+import HouseholdGoodsModal from '../HouseholdGoodsModal';
 
 import OptionField from '../fields/OptionField';
-
-const MOVEMENT_OPTIONS = [
-  { value: 'DOOR_TO_DOOR', label: 'Door to Door' },
-  { value: 'PORT_TO_DOOR', label: 'Port to Door' },
-  { value: 'DOOR_TO_PORT', label: 'Door to Port' },
-  { value: 'PORT_TO_PORT', label: 'Port to Port' },
-];
+import * as OPTS from '../options';
+import NumberField from '../fields/NumberField';
+import TextField from '../fields/TextField';
+import PlaceField from '../fields/PlaceField';
+import AsyncOptionField from '../fields/AsyncOptionField';
+import {
+  maxZeroDecimals,
+  maxTwoDecimals,
+  maxThreeDecimals,
+  nearestHalf,
+} from '../utils';
 
 const QuoteFormDisplay = props => (
   <div className="instant-quote-form form">
@@ -16,7 +26,19 @@ const QuoteFormDisplay = props => (
       <div className="form-section-title">Transport Details</div>
       <div className="form-row">
         <div className="field">
-          <div className="label">Mode of transport</div>
+          <div className="label">
+            Mode of transport{' '}
+            <div className="tooltip">
+              <div className="tooltip-text">
+                <div className="tooltip-text-line">
+                  Ocean: Typical transit time of 10 - 35 days.
+                </div>
+                <div className="tooltip-text-line">
+                  Air: Typical transit time of 2 - 7 days.
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="radio-button-group">
             <button
               className={`radio-button ${props.oceanButtonClass}`}
@@ -36,15 +58,31 @@ const QuoteFormDisplay = props => (
             </button>
           </div>
         </div>
-        <div className="field">
+        <div className="field movement-type">
           <div className="label">&nbsp;</div>
-          <div className="field-wrapper">
-            <div className="field-label">* Movement type</div>
-            <OptionField
-              value={props.movementType}
-              options={MOVEMENT_OPTIONS}
-              onChange={props.setMovementType}
-            />
+          <div className="field-and-tooltip">
+            <div className="field-wrapper">
+              <div className="field-label">* Movement type</div>
+              <OptionField
+                value={props.movementType}
+                options={OPTS.MOVEMENT_OPTIONS}
+                onChange={props.setMovementType}
+              />
+            </div>
+            <div className="tooltip">
+              <div className="tooltip-text">
+                <div className="tooltip-text-line">
+                  For door to door shipments, your cargo will be picked up from
+                  and delivered to specified places of business. Pickup and
+                  delivery charges will apply.
+                </div>
+                <div className="tooltip-text-line">
+                  For port to port shipments, you will be responsible for
+                  delivery of goods to the origin port and pickup of goods from
+                  the destination port.
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -52,100 +90,200 @@ const QuoteFormDisplay = props => (
     <div className="form-section">
       <div className="form-section-title">Location Details</div>
       <div className="form-row">
-        <div className="field country">
-          <div className="field-wrapper">
-            <div className="field-label">* Origin country</div>
+        {props.movementType === 'DOOR_TO_DOOR' ||
+        props.movementType === 'DOOR_TO_PORT' ? (
+          <div className="field location">
+            <div className="field-wrapper">
+              <div className="field-label">* Pickup location</div>
+              <PlaceField
+                value={props.pickupLocation}
+                onChange={props.setPickupLocation}
+              />
+            </div>
           </div>
-        </div>
-        <div className="field">
-          <div className="field-wrapper">
-            <div className="field-label">* Origin city</div>
+        ) : (
+          <div className="field location">
+            <div className="field-wrapper">
+              <div className="field-label">
+                * Departure{' '}
+                {props.modeOfTransport === 'Ocean' ? 'port' : 'airport'}
+              </div>
+              {props.modeOfTransport === 'Air' && (
+                <AsyncOptionField
+                  searchMethod="search.airports"
+                  value={props.departureAirport}
+                  onChange={props.setDepartureAirport}
+                />
+              )}
+              {props.modeOfTransport === 'Ocean' && (
+                <AsyncOptionField
+                  searchMethod="search.seaports"
+                  value={props.departureSeaport}
+                  onChange={props.setDepartureSeaport}
+                />
+              )}
+            </div>
           </div>
-        </div>
-        <div className="field country">
-          <div className="field-wrapper">
-            <div className="field-label">* Destination country</div>
+        )}
+        {props.movementType === 'DOOR_TO_DOOR' ||
+        props.movementType === 'PORT_TO_DOOR' ? (
+          <div className="field location">
+            <div className="field-wrapper">
+              <div className="field-label">* Delivery location</div>
+              <PlaceField
+                value={props.deliveryLocation}
+                onChange={props.setDeliveryLocation}
+              />
+            </div>
           </div>
-        </div>
-        <div className="field">
-          <div className="field-wrapper">
-            <div className="field-label">* Destination city</div>
+        ) : (
+          <div className="field location">
+            <div className="field-wrapper">
+              <div className="field-label">
+                * Arrival{' '}
+                {props.modeOfTransport === 'Ocean' ? 'port' : 'airport'}
+              </div>
+              {props.modeOfTransport === 'Air' && (
+                <AsyncOptionField
+                  searchMethod="search.airports"
+                  value={props.arrivalAirport}
+                  onChange={props.setArrivalAirport}
+                />
+              )}
+              {props.modeOfTransport === 'Ocean' && (
+                <AsyncOptionField
+                  searchMethod="search.seaports"
+                  value={props.arrivalSeaport}
+                  onChange={props.setArrivalSeaport}
+                />
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
     <div className="form-section">
       <div className="form-section-title">Cargo Details</div>
+      {props.isContainerCargo
+        ? props.cargoRows.map((_, index) => (
+            <ContainerRow key={index} index={index} />
+          ))
+        : props.cargoRows.map((_, index) => (
+            <PackageRow key={index} index={index} />
+          ))}
       <div className="form-row">
-        <div className="field package-type">
-          <div className="field-wrapper">
-            <div className="field-label">* Package type</div>
-          </div>
-        </div>
-        <div className="field quantity">
-          <div className="field-wrapper">
-            <div className="field-label">* Qty</div>
-          </div>
-        </div>
-        <div className="field dimensions">
-          <div className="field-wrapper">
-            <div className="field-section">
-              <div className="field-label">* Unit</div>
-            </div>
-            <div className="field-section">
-              <div className="field-label">Length</div>
-            </div>
-            <div className="field-section">
-              <div className="field-label">Width</div>
-            </div>
-            <div className="field-section">
-              <div className="field-label">Height</div>
+        {props.isContainerCargo ? (
+          <div className="field total">
+            <div className="label">Total weight in kg</div>
+            <div className="field-wrapper">
+              <div className="field-label">Total weight</div>
+              <div className="non-editable-field-value numeric">
+                {maxTwoDecimals(props.weightInKG)}
+              </div>
             </div>
           </div>
-        </div>
-        <div className="field volume">
-          <div className="field-wrapper">
-            <div className="field-label">* CBM</div>
-          </div>
-        </div>
-        <div className="field weight">
-          <div className="field-wrapper">
-            <div className="field-section">
-              <div className="field-label">* Unit</div>
+        ) : (
+          <div className="field total">
+            <div className="label">Total</div>
+            <div className="field-wrapper">
+              <div className="field-section">
+                <div className="field-label">Weight in kg</div>
+                <div className="non-editable-field-value numeric">
+                  {maxTwoDecimals(props.weightInKG)}
+                </div>
+              </div>
+              <div className="field-section">
+                <div className="field-label">CBM</div>
+                <div className="non-editable-field-value numeric">
+                  {maxThreeDecimals(props.volumeInCBM)}
+                </div>
+              </div>
             </div>
-            <div className="field-section">
-              <div className="field-label">Per piece</div>
+          </div>
+        )}
+
+        {props.modeOfTransport === 'Ocean' &&
+          !props.isContainerCargo && (
+            <div className="field revenue-ton">
+              <div className="label">Revenue Tons</div>
+              <div className="field-wrapper">
+                <div className="field-label">Weight in tons</div>
+                <div className="non-editable-field-value numeric">
+                  {maxZeroDecimals(props.revenueTons)}
+                </div>
+              </div>
             </div>
-            <div className="field-section">
-              <div className="field-label">* Total</div>
+          )}
+        {props.modeOfTransport === 'Air' && (
+          <div className="field chargeable-weight">
+            <div className="label">Chargeable &amp; Volumetric Weight</div>
+            <div className="field-wrapper">
+              <div className="field-section">
+                <div className="field-label">Chargeable weight in kg</div>
+                <div className="non-editable-field-value numeric">
+                  {nearestHalf(props.chargeableWeightInKG)}
+                </div>
+              </div>
+              <div className="field-section">
+                <div className="field-label">Volumetric weight in kg</div>
+                <div className="non-editable-field-value numeric">
+                  {maxThreeDecimals(props.volumetricWeightInKG)}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <button className="add-row">
-          <div className="icon" />
-        </button>
-      </div>
-      <div className="form-row">
-        <div className="field total">
-          <div className="label">Total</div>
-          <div className="field-wrapper">
-            <div className="field-label">Weight in kgs</div>
-          </div>
-        </div>
-        <div className="field revenue-ton">
-          <div className="label">Revenue Tons</div>
-          <div className="field-wrapper">
-            <div className="field-label">Weight in tons</div>
-          </div>
-        </div>
+        )}
       </div>
       <div className="form-row">
         <div className="field description">
           <div className="field-wrapper">
             <div className="field-label">* Cargo description</div>
+            <TextField
+              value={props.description}
+              onChange={props.setDescription}
+            />
           </div>
         </div>
       </div>
+      <div className="form-row">
+        <button
+          className={`checkbox ${props.isHazardousClass}`}
+          onClick={props.setIsHazardous(!props.isHazardous)}
+        >
+          <div className="checkbox-icon" />
+          <span className="label">Hazardous material</span>
+          <div className="tooltip">
+            <div className="tooltip-text">
+              <div className="tooltip-text-line">
+                If your cargo contains hazardous material, please check the box
+                and then select the class of hazardous goods. Our service team
+                will send your request to our specialized representatives.
+              </div>
+            </div>
+          </div>
+        </button>
+        <button
+          className={`checkbox ${props.isHouseholdGoodsClass}`}
+          onClick={props.setIsHouseholdGoods(!props.isHouseholdGoods)}
+        >
+          <div className="checkbox-icon" />
+          <span className="label">Household goods</span>
+          <div className="tooltip">
+            <div className="tooltip-text">
+              <div className="tooltip-text-line">
+                We do not offer shipping of household goods or other personal
+                items.
+              </div>
+            </div>
+          </div>
+        </button>
+      </div>
+      {props.hazardousClass && (
+        <div className="hazardous-class">
+          <div className="check-circle" />
+          <Translate value={`hazardousClasses.${props.hazardousClass}`} />
+        </div>
+      )}
     </div>
     <div className="form-section">
       <div className="form-section-title">Additional Details (optional)</div>
@@ -153,23 +291,56 @@ const QuoteFormDisplay = props => (
         <div className="field">
           <div className="field-wrapper">
             <div className="field-label">Preferred currency</div>
+            <OptionField
+              value={props.preferredCurrency}
+              options={OPTS.CURRENCY_OPTIONS}
+              onChange={props.setPreferredCurrency}
+            />
           </div>
         </div>
-        <button className="checkbox">
-          <div className="checkbox-icon" />
-          <span className="label">Hazardous material</span>
-        </button>
-        <button className="checkbox">
-          <div className="checkbox-icon" />
-          <span className="label">Household goods</span>
-        </button>
-        <button className="checkbox">
+        <button
+          className={`checkbox ${props.isInsuranceRequiredClass}`}
+          onClick={props.setIsInsuranceRequired(!props.isInsuranceRequired)}
+        >
           <div className="checkbox-icon" />
           <span className="label">Insurance required</span>
+          <div className="tooltip">
+            <div className="tooltip-text">
+              <div className="tooltip-text-line">
+                If enabled, an insurance premium will be added based on the
+                value of the goods.
+              </div>
+            </div>
+          </div>
         </button>
+        {props.isInsuranceRequired && (
+          <div className="field cargo-value">
+            <div className="field-wrapper">
+              <div className="field-label">* Cargo value</div>
+              <NumberField
+                value={props.cargoValue}
+                onChange={props.setCargoValue}
+              />
+            </div>
+          </div>
+        )}
+        {props.isInsuranceRequired && (
+          <div className="field cargo-value-currency">
+            <div className="field-wrapper">
+              <div className="field-label">* Cargo value currency</div>
+              <OptionField
+                value={props.cargoValueCurrency}
+                options={OPTS.CURRENCY_OPTIONS}
+                onChange={props.setCargoValueCurrency}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
     <button className="form-button">Get Instant Quote</button>
+    {props.showHazardousModal && <HazardousModal />}
+    {props.isHouseholdGoods && <HouseholdGoodsModal />}
   </div>
 );
 

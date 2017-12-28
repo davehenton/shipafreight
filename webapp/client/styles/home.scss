@@ -2,6 +2,7 @@
   color: #333333;
   padding-top: 80px;
   .instant-quote {
+    box-sizing: border-box;
     width: 1200px;
     padding: 0 15px;
     margin-right: auto;
@@ -38,30 +39,93 @@
   .field.total {
     width: 200px;
   }
-  .field.quantity,
-  .field.volume,
+  .field.location {
+    width: 50%;
+  }
+  .field.movement-type {
+    width: 350px;
+  }
   .field.revenue-ton {
     width: 120px;
   }
+  .field.quantity,
+  .field.volume {
+    width: 80px;
+  }
   .field.dimensions {
-    width: 300px;
+    border: none;
+    width: 380px;
+  }
+  .field.dimensions .field-section {
+    flex-basis: 25%;
+  }
+  .field.dimensions .checkbox {
+    padding: 0;
+    height: 20px;
+    margin-top: -1px;
+    margin-bottom: 5px;
+  }
+  .field.dimensions .checkbox-icon {
+    margin-right: 3px;
   }
   .field.weight {
     width: 260px;
   }
+  .field.weight .field-section {
+    flex-basis: calc(100% / 3);
+  }
   .field.description {
     width: 100%;
   }
-  .add-row {
+  .field.chargeable-weight {
+    width: 360px;
+  }
+  .field.container-weight {
+    width: 340px;
+  }
+  .field.total .field-section,
+  .field.chargeable-weight .field-section {
+    flex-basis: 50%;
+  }
+  .add-row,
+  .remove-row {
     background-color: transparent;
     box-shadow: none;
   }
-  .add-row .icon {
+  .add-row .icon,
+  .remove-row .icon {
+    position: relative;
+    top: 12px;
     background-image: url(../landing-sprite.svg);
     background-position: -66px 0;
     width: 32px;
     height: 32px;
     display: inline-block;
     vertical-align: middle;
+  }
+  .remove-row .icon {
+    background-position: -66px -36px;
+  }
+  .hazardous-class {
+    margin-top: -25px;
+    margin-left: 15px;
+    padding: 10px 10px;
+    font-size: 14px;
+    width: 350px;
+    border: 1px solid #f08200;
+    background-color: #ffebd3;
+    display: flex;
+    align-items: center;
+  }
+  .check-circle {
+    background-image: url(../landing-sprite.svg);
+    background-position: -190px -4px;
+    height: 26px;
+    width: 30px;
+    margin-right: 8px;
+  }
+  .field.cargo-value,
+  .field.cargo-value-currency {
+    width: 250px;
   }
 }

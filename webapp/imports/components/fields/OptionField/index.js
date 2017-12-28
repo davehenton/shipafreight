@@ -20,6 +20,7 @@ const OptionField = props => {
   return (
     <Select
       className="select"
+      disabled={props.disabled}
       value={props.value}
       valueKey={props.valueKey}
       labelKey={props.labelKey}
@@ -33,7 +34,7 @@ const OptionField = props => {
       }}
       onInputChange={props.onInputChange}
       clearable={false}
-      arrowRenderer={noop}
+      // arrowRenderer={noop}
       placeholder={props.placeholder}
       optionRenderer={optionRenderer}
       valueRenderer={valueRenderer}

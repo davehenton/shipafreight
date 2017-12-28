@@ -8,11 +8,19 @@
   position: relative;
   height: 50px;
   display: flex;
+  margin-top: 8px;
+}
+.field.disabled .field-wrapper {
+  border-color: rgba(221, 221, 221, 0.5);
 }
 .field-section {
   position: relative;
   border-right: 2px solid rgb(221, 221, 221);
   flex-grow: 1;
+  height: 100%;
+}
+.field-section .Select-menu-outer {
+  top: 45px;
 }
 .field-section:last-child {
   border-right: none;
@@ -22,14 +30,52 @@
   font-size: 12px;
   font-weight: 400;
   top: -8px;
-  left: 13px;
+  left: 4px;
   position: absolute;
   background-color: white;
   padding: 0 5px 0 3px;
+}
+.field .label-append {
+  font-weight: 400;
+  font-size: 12px;
+  position: relative;
+  top: 2px;
+  left: 4px;
+  color: #999999;
 }
 .field .select {
   position: relative;
   top: 9px;
   width: 100%;
   padding: 0 5px;
+}
+.field .input {
+  box-sizing: border-box;
+  position: relative;
+  height: 37px;
+  padding: 8px 5px 12px 15px;
+  top: 13px;
+  max-width: calc(100% - 5px);
+  width: calc(100% - 5px);
+}
+.field .numeric {
+  text-align: right;
+}
+.field .non-editable-field-value {
+  box-sizing: border-box;
+  padding: 19px 15px 12px 15px;
+  font-size: 14px;
+  width: 100%;
+}
+.field-and-tooltip {
+  display: flex;
+  align-items: center;
+}
+.field-and-tooltip .field-wrapper {
+  width: 100%;
+}
+.field-and-tooltip .tooltip {
+  position: relative;
+  top: 8px;
+  left: 10px;
 }
