@@ -5,7 +5,8 @@
   "scripts": {
     "unit": "jest --config=jest.config.json",
     "unit-ci": "jest --config=jest.config.json --coverage --runInBand",
-    "cover": "jest --config=jest.config.json --coverage"
+    "cover": "jest --config=jest.config.json --coverage",
+    "codeclimate-test-reporter": "codeclimate-test-reporter"
   },
   "dependencies": {
     "babel-env": "^2.4.1",
