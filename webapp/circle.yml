@@ -7,15 +7,7 @@ dependencies:
     - "webapp/node_modules"
     - "~/.npm"
     - "~/.meteor"
-  override:
-    - PATH=$PATH:$HOME/webapp/.meteor
-    - if [ -d ~/.meteor ]; then sudo ln -s ~/.meteor/meteor /usr/local/bin/meteor; fi
-    - if [ ! -e $HOME/.meteor/meteor ]; then curl https://install.meteor.com | sh; fi
-    - meteor update
-    - meteor npm install
 test:
   override:
-    - meteor:
-        background: true
     - npm run unit-ci
     - CODECLIMATE_REPO_TOKEN=7c1d7d921e1a66b1208abd0f671d09e172780bd562938090168759c93b802169 meteor npm run codeclimate-test-reporter < .coverage/lcov.info 
