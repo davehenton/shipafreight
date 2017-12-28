@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "unit": "jest --config=jest.config.json",
-    "unit-ci": "jest --config=jest.config.json",
-    "cover": "jest --config=jest.config.json --coverage --runInBand"
+    "unit-ci": "jest --config=jest.config.json --runInBand",
+    "cover": "jest --config=jest.config.json --coverage"
   },
   "dependencies": {
     "babel-env": "^2.4.1",
