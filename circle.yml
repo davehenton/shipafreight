@@ -9,6 +9,8 @@ dependencies:
     - "~/.meteor"
   override:
     - npm install
+    - cd webapp
+    - npm install
 test:
   override:
     - npm run unit-ci
