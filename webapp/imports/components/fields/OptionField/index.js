@@ -34,7 +34,6 @@ const OptionField = props => {
       }}
       onInputChange={props.onInputChange}
       clearable={false}
-      // arrowRenderer={noop}
       placeholder={props.placeholder}
       optionRenderer={optionRenderer}
       valueRenderer={valueRenderer}
