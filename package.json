@@ -5,11 +5,13 @@
   "scripts": {
     "unit": "jest --config=jest.config.json",
     "unit-ci": "jest --config=jest.config.json",
-    "cover": "jest --config=jest.config.json --coverage"
+    "cover": "jest --config=jest.config.json --coverage --runInBand"
   },
   "dependencies": {
     "babel-env": "^2.4.1",
     "babel-jest": "^22.0.4",
+    "babel-plugin-syntax-object-rest-spread": "^6.13.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "jest": "^22.0.4",
