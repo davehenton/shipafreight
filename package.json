@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "babel-env": "^2.4.1",
+    "babel-jest": "^22.0.4",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "jest": "^22.0.4",
