@@ -20,6 +20,7 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
-    "chimp": "^2.0.0-alpha.5"
+    "chimp": "^2.0.0-alpha.5",
+    "chromedriver": "^2.34.0"
   }
 }
