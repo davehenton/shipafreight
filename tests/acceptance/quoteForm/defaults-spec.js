@@ -1,6 +1,6 @@
 describe('Quote Form Defaults', function() {
   let b;
-  beforeAll(() => {
+  beforeEach(() => {
     b = browser;
     b.url('http://localhost:3000');
   });
@@ -8,7 +8,7 @@ describe('Quote Form Defaults', function() {
     expect(b.getTitle()).toBe('ShipA Next');
   });
   it('defaults mode of transport to Ocean', () => {
-    console.log(b.elements('div'));
+    console.log(b.element('div').getAttribute('id'));
     b.waitUntil(() => b.isExisting('#ocean-button'), 30000);
     const oceanButton = b.element('#ocean-button');
     expect(/active/.test(oceanButton.getAttribute('class'))).toBe(true);
