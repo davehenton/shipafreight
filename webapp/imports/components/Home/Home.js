@@ -15,7 +15,7 @@ const Home = () => (
         <div className="subtitle">Get instant quotes when you want them</div>
         <button>Learn More</button>
       </div>
-      {/* <QuoteForm /> */}
+      <QuoteForm />
     </div>
   </div>
 );

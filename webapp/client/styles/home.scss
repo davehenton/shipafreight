@@ -128,4 +128,10 @@
   .field.cargo-value-currency {
     width: 250px;
   }
+  @media screen and (max-width: 750px) {
+    .instant-quote {
+      width: 750px;
+      padding: 0;
+    }
+  }
 }

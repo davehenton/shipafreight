@@ -5,8 +5,7 @@
   "scripts": {
     "unit": "jest --config=jest.config.json",
     "unit-ci": "jest --config=jest.config.json --coverage --runInBand",
-    "acceptance-ci":
-      "chimp --browser=phantomjs --ddp=http://localhost:3000 --jasmine --path=tests/acceptance",
+    "acceptance-ci": "chimp --browser=phantomjs --ddp=http://localhost:3000 --jasmine --path=tests/acceptance",
     "cover": "jest --config=jest.config.json --coverage",
     "codeclimate-test-reporter": "codeclimate-test-reporter"
   },
@@ -15,7 +14,7 @@
     "babel-jest": "^22.0.4",
     "babel-plugin-syntax-object-rest-spread": "^6.13.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "chimp": "^0.50.2",
+    "chimp": "^2.0.0-alpha.5",
     "codeclimate-test-reporter": "^0.5.0",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.1",

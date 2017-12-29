@@ -1,14 +1,15 @@
+import browser from 'chimp/jest/browser';
+
 describe('Quote Form Defaults', function() {
   let b;
   beforeAll(() => {
+    console.log(browser);
     b = browser;
-    b.url('http://localhost:3000');
   });
-  it('should be ShipA Next', function() {
-    expect(b.getTitle()).toBe('ShipA Next');
-  });
-  it('has a home element', () => {
-    b.waitUntil(() => b.isExisting('.home'), 30000);
+  it('should be ShipA Next', async function() {
+    await b.url('http://localhost:3000');
+    const title = await b.getTitle();
+    expect(title).toBe('ShipA Next');
   });
   // it('defaults mode of transport to Ocean', () => {
   //   console.log(b.element('div').getAttribute('id'));

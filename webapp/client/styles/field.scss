@@ -79,3 +79,8 @@
   top: 8px;
   left: 10px;
 }
+@media screen and (max-width: 750px) {
+  .field {
+    width: 100%;
+  }
+}
