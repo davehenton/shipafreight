@@ -1,6 +1,6 @@
 describe('Quote Form Defaults', function() {
   let b;
-  beforeAll(() => {
+  beforeEach(() => {
     b = browser;
     b.url('http://localhost:3000');
     // b.waitUntil(() => b.isExisting('.form'), 30000);
