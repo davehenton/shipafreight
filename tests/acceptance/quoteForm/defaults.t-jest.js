@@ -6,11 +6,6 @@ describe('Quote Form Defaults', function() {
     b = browser;
     await b.url('http://localhost:3000');
   });
-  it('should be ShipA Next', async function() {
-    await b.url('http://localhost:3000');
-    const title = await b.getTitle();
-    expect(title).toBe('ShipA Next');
-  });
   it('defaults mode of transport to Ocean', async function() {
     const classes = await b.getAttribute('#ocean-button', 'class');
     expect(/active/.test(classes)).toBe(true);
