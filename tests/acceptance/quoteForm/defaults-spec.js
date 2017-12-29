@@ -3,9 +3,7 @@ describe('Quote Form Defaults', function() {
   beforeAll(() => {
     b = browser;
     b.url('http://localhost:3000');
-  });
-  it('should have a page title of ShipA Next', function() {
-    expect(b.getTitle()).toBe('ShipA Next');
+    b.waitUntil(() => b.isExisting('.form'), 30000);
   });
   describe('default values', () => {
     it('defaults mode of transport to Ocean', () => {
