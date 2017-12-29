@@ -5,8 +5,8 @@ describe('Quote Form Defaults', function() {
     b.url('http://localhost:3000');
     b.waitUntil(() => b.isExisting('.form'), 30000);
   });
-  it('should be Agility CM', function() {
-    expect(b.getTitle()).toBe('Agility CM');
+  it('should be ShipA Next', function() {
+    expect(b.getTitle()).toBe('ShipA Next');
   });
   // describe('default values', () => {
   //   it('defaults mode of transport to Ocean', () => {
