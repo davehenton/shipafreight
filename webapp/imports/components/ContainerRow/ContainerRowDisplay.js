@@ -5,7 +5,7 @@ import * as OPTS from '../options';
 import NumberField from '../fields/NumberField';
 
 const ContainerRowDisplay = props => (
-  <div className="form-row">
+  <div className="form-row container-row">
     <div className="field package-type">
       <div className="label">&nbsp;</div>
       <div className="field-wrapper">

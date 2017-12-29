@@ -29,7 +29,7 @@ const DimsLabel = {
 };
 
 const PackageRowDisplay = props => (
-  <div className="form-row">
+  <div className="form-row package-row">
     <div className="field package-type">
       <div className="label">&nbsp;</div>
       <div className="field-wrapper">
