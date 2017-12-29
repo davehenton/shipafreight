@@ -3,7 +3,7 @@ describe('Quote Form Defaults', function() {
   beforeAll(() => {
     b = browser;
     b.url('http://localhost:3000');
-    b.waitUntil(() => b.isExisting('.form'), 30000);
+    // b.waitUntil(() => b.isExisting('.form'), 30000);
   });
   it('should be ShipA Next', function() {
     expect(b.getTitle()).toBe('ShipA Next');
