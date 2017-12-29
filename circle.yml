@@ -16,12 +16,12 @@ dependencies:
     - (cd webapp && meteor npm install)
 test:
   override:
-    pwd:
-      webapp
+      pwd:
+        webapp
     - meteor:
       background: true
-    pwd:
-      $HOME
+      pwd:
+        $HOME
     - npm run unit-ci
     - CODECLIMATE_REPO_TOKEN=7c1d7d921e1a66b1208abd0f671d09e172780bd562938090168759c93b802169 npm run codeclimate-test-reporter < .coverage/lcov.info 
     - until curl --max-time 300 http://localhost:3000/; do sleep 1; done
