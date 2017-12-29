@@ -128,10 +128,45 @@
   .field.cargo-value-currency {
     width: 250px;
   }
-  @media screen and (max-width: 750px) {
+}
+@media screen and (max-width: 750px) {
+  .home {
+    width: 100%;
     .instant-quote {
-      width: 750px;
+      width: 100%;
       padding: 0;
+    }
+    .field,
+    .hazardous-class-outer,
+    .hazardous-class {
+      box-sizing: border-box;
+      margin-bottom: 5px;
+    }
+    .hazardous-class-outer {
+      margin: 0 -15px;
+      padding: 0 15px;
+    }
+    .field.volume,
+    .field.quantity,
+    .field.package-type {
+      width: 50%;
+    }
+    .field.location,
+    .field.total,
+    .field.chargeable-weight,
+    .field.revenue-tons,
+    .field.weight,
+    .field.cargo-value,
+    .field.cargo-value-currency,
+    .hazardous-class-outer,
+    .hazardous-class {
+      width: 100%;
+    }
+    .field.quantity {
+      display: inline-block;
+    }
+    .dimensions {
+      max-width: 100%;
     }
   }
 }

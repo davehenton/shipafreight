@@ -12,3 +12,15 @@ body {
 .hide {
   display: none;
 }
+@media screen and (max-width: 750px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+  // html {
+  //   width: 100vw;
+  // }
+  // body {
+  //   width: 100%;
+  // }
+}

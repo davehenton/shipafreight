@@ -39,3 +39,11 @@
   justify-content: center;
   margin-bottom: 15px;
 }
+@media screen and (max-width: 750px) {
+  .modal {
+    width: 100vw;
+  }
+  .modal-form {
+    width: 90%;
+  }
+}

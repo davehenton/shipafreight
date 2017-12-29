@@ -31,3 +31,12 @@
     font-size: 14px;
   }
 }
+
+@media screen and (max-width: 750px) {
+  .hazardous-modal .preview {
+    display: none;
+  }
+  .hazardous-modal .radio-button-list {
+    flex-basis: 100%;
+  }
+}

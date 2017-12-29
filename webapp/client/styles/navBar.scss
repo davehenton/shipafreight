@@ -45,6 +45,15 @@
 }
 .nav-bar .nav-link.primary {
   background-color: rgb(240, 130, 0);
-  color: white;
+  color: rgb(172, 121, 121);
   font-weight: 600;
+}
+@media screen and (max-width: 750px) {
+  .nav-bar,
+  .nav-bar-inner {
+    width: 100vw;
+  }
+  .nav-bar-inner {
+    display: none;
+  }
 }

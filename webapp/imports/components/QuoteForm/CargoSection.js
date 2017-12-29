@@ -118,7 +118,7 @@ const CargoSection = props => (
         </div>
       </button>
     </div>
-    <div className={props.hazardousClassClass}>
+    <div className={`hazardous-class-outer ${props.hazardousClassClass}`}>
       <div className="hazardous-class">
         <div className="check-circle" />
         <Translate value={`hazardousClasses.${props.hazardousClass}`} />

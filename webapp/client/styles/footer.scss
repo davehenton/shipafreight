@@ -110,3 +110,21 @@
 .icon-linkedin {
   background-position: -192px -40px;
 }
+@media screen and (max-width: 750px) {
+  .footer,
+  .footer-menu,
+  .footer-copyright {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    overflow-x: hidden;
+  }
+  .footer-menu,
+  .footer-copyright {
+    flex-direction: column;
+    padding: 20px;
+  }
+  .footer-menu-list {
+    margin-bottom: 25px;
+  }
+}
