@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "unit": "jest --config=jest.config.json",
+    "watch": "jest --config=jest.config.json --watchAll",
     "unit-ci": "jest --config=jest.config.json --coverage --runInBand",
-    "acceptance-ci": "chimp --browser=phantomjs --ddp=http://localhost:3000 --jasmine --path=tests/acceptance",
+    "acceptance-ci":
+      "chimp --browser=phantomjs --ddp=http://localhost:3000 --jasmine --path=tests/acceptance",
     "cover": "jest --config=jest.config.json --coverage",
     "codeclimate-test-reporter": "codeclimate-test-reporter"
   },

@@ -2,21 +2,19 @@ import browser from 'chimp/jest/browser';
 
 describe('Quote Form Defaults', function() {
   let b;
-  beforeAll(() => {
-    console.log(browser);
+  beforeAll(async function() {
     b = browser;
+    await b.url('http://localhost:3000');
   });
   it('should be ShipA Next', async function() {
     await b.url('http://localhost:3000');
     const title = await b.getTitle();
     expect(title).toBe('ShipA Next');
   });
-  // it('defaults mode of transport to Ocean', () => {
-  //   console.log(b.element('div').getAttribute('id'));
-  //   b.waitUntil(() => b.isExisting('#ocean-button'), 30000);
-  //   const oceanButton = b.element('#ocean-button');
-  //   expect(/active/.test(oceanButton.getAttribute('class'))).toBe(true);
-  // });
+  it('defaults mode of transport to Ocean', async function() {
+    const classes = await b.getAttribute('#ocean-button', 'class');
+    expect(/active/.test(classes)).toBe(true);
+  });
   // it('defaults movement type to Door to Door', () => {
   //   const movementType = b.element('.movement-type .Select-value-label span');
   //   expect(movementType.getText()).toBe('Door to Door');
