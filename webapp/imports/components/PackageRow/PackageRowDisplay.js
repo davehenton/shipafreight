@@ -51,7 +51,7 @@ const PackageRowDisplay = props => (
     <div className={`field dimensions ${props.dimensionsFieldClass}`}>
       {DimsLabel[props.modeOfTransport](props)}
       <div className="field-wrapper">
-        <div className="field-section">
+        <div className="field-section dimensions-uom">
           <div className="field-label">* Unit</div>
           <OptionField
             value={props.dimensionsUOM}
@@ -60,7 +60,7 @@ const PackageRowDisplay = props => (
             onChange={props.setDimensionsUOM}
           />
         </div>
-        <div className="field-section">
+        <div className="field-section length">
           <div className="field-label">Length</div>
           <NumberField
             value={props.length}
@@ -68,7 +68,7 @@ const PackageRowDisplay = props => (
             disabled={props.isDimsFieldDisabled}
           />
         </div>
-        <div className="field-section">
+        <div className="field-section width">
           <div className="field-label">Width</div>
           <NumberField
             value={props.width}
@@ -76,7 +76,7 @@ const PackageRowDisplay = props => (
             disabled={props.isDimsFieldDisabled}
           />
         </div>
-        <div className="field-section">
+        <div className="field-section height">
           <div className="field-label">Height</div>
           <NumberField
             value={props.height}
@@ -100,7 +100,7 @@ const PackageRowDisplay = props => (
     <div className="field weight">
       <div className="label">Weight</div>
       <div className="field-wrapper">
-        <div className="field-section">
+        <div className="field-section weight-uom">
           <div className="field-label">* Unit</div>
           <OptionField
             value={props.weightUOM}
@@ -115,7 +115,7 @@ const PackageRowDisplay = props => (
             onChange={props.setWeightPerPiece}
           />
         </div>
-        <div className="field-section">
+        <div className="field-section weight-total">
           <div className="field-label">Total</div>
           <div className="non-editable-field-value numeric">
             {maxTwoDecimals(props.weightTotal)}

@@ -20,13 +20,13 @@ const CargoSection = props => (
       <div className={`field total ${props.weightAndCBMTotalsClass}`}>
         <div className="label">Total</div>
         <div className="field-wrapper">
-          <div className="field-section">
+          <div className="field-section weight-in-kg">
             <div className="field-label">Weight in kg</div>
             <div className="non-editable-field-value numeric">
               {maxTwoDecimals(props.weightInKG)}
             </div>
           </div>
-          <div className="field-section">
+          <div className="field-section volume-in-cbm">
             <div className="field-label">CBM</div>
             <div className="non-editable-field-value numeric">
               {maxThreeDecimals(props.volumeInCBM)}
@@ -43,7 +43,7 @@ const CargoSection = props => (
           </div>
         </div>
       </div>
-      <div className={`field revenue-ton ${props.revenueTonsClass}`}>
+      <div className={`field revenue-tons ${props.revenueTonsClass}`}>
         <div className="label">Revenue Tons</div>
         <div className="field-wrapper">
           <div className="field-label">Weight in tons</div>
@@ -87,7 +87,7 @@ const CargoSection = props => (
     </div>
     <div className="form-row">
       <button
-        className={`checkbox ${props.isHazardousClass}`}
+        className={`hazardous-material checkbox ${props.isHazardousClass}`}
         onClick={props.setIsHazardous(!props.isHazardous)}
       >
         <div className="checkbox-icon" />
@@ -103,7 +103,7 @@ const CargoSection = props => (
         </div>
       </button>
       <button
-        className={`checkbox ${props.isHouseholdGoodsClass}`}
+        className={`household-goods checkbox ${props.isHouseholdGoodsClass}`}
         onClick={props.setIsHouseholdGoods(!props.isHouseholdGoods)}
       >
         <div className="checkbox-icon" />

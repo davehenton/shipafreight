@@ -171,7 +171,7 @@ const QuoteFormDisplay = props => {
       <div className="form-section">
         <div className="form-section-title">Additional Details (optional)</div>
         <div className="form-row">
-          <div className="field">
+          <div className="field preferred-currency">
             <div className="field-wrapper">
               <div className="field-label">Preferred currency</div>
               <OptionField
@@ -182,7 +182,9 @@ const QuoteFormDisplay = props => {
             </div>
           </div>
           <button
-            className={`checkbox ${props.isInsuranceRequiredClass}`}
+            className={`insurance-required checkbox ${
+              props.isInsuranceRequiredClass
+            }`}
             onClick={props.setIsInsuranceRequired(!props.isInsuranceRequired)}
           >
             <div className="checkbox-icon" />
