@@ -3,7 +3,7 @@ describe('Quote Form Defaults', function() {
   beforeAll(() => {
     b = browser;
     b.url('http://localhost:3000');
-    b.waitForExist('.form');
+    b.waitForExist('.form', 5000);
   });
   describe('default values', () => {
     it('defaults mode of transport to Ocean', () => {
