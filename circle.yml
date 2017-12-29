@@ -12,8 +12,10 @@ dependencies:
     - PATH=$PATH:$HOME/.meteor
     - if [ -d ~/.meteor ]; then sudo ln -s ~/.meteor/meteor /usr/local/bin/meteor; fi
     - if [ ! -e $HOME/.meteor/meteor ]; then curl https://install.meteor.com | sh; fi
-    - (cd webapp && meteor update)
-    - (cd webapp && meteor npm install)
+    - meteor update:
+        pwd: webapp
+    - meteor npm install:
+        pwd: webapp
 test:
   override:
     - meteor:
