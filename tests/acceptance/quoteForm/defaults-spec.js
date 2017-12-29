@@ -3,12 +3,12 @@ describe('Quote Form Defaults', function() {
   beforeAll(() => {
     b = browser;
     b.url('http://localhost:3000');
-    b.waitUntil(() => b.isExisting('#ocean-button'), 30000);
   });
   it('should be ShipA Next', function() {
     expect(b.getTitle()).toBe('ShipA Next');
   });
   it('defaults mode of transport to Ocean', () => {
+    b.waitUntil(() => b.isExisting('#ocean-button'), 30000);
     const oceanButton = b.element('#ocean-button');
     expect(/active/.test(oceanButton.getAttribute('class'))).toBe(true);
   });
