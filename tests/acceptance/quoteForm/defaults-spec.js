@@ -5,6 +5,9 @@ describe('Quote Form Defaults', function() {
     b.url('http://localhost:3000');
     b.waitForExist('.form', 5000);
   });
+  it('should have a page title of ShipA Next', function() {
+    expect(b.getTitle()).toBe('ShipA Next');
+  });
   describe('default values', () => {
     it('defaults mode of transport to Ocean', () => {
       const oceanButton = b.element('#ocean-button');
