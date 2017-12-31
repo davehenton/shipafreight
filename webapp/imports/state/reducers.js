@@ -194,6 +194,22 @@ export const quoteForm = (
   }
 };
 
-const reducers = combineReducers({ quoteForm, i18n: i18nReducer });
+export const couponCarousel = (
+  state = { hasFetched: false, coupons: [] },
+  action
+) => {
+  switch (action.type) {
+    case AT.SET_COUPON_CAROUSEL_PROP:
+      return _.set(action.prop, action.value, state);
+    default:
+      return state;
+  }
+};
+
+const reducers = combineReducers({
+  quoteForm,
+  couponCarousel,
+  i18n: i18nReducer,
+});
 
 export default reducers;

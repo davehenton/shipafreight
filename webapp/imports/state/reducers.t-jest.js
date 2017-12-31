@@ -207,4 +207,15 @@ describe('reducers.js', () => {
       expect(reducers.quoteForm(state, action).isContainerCargo).toBe(false);
     });
   });
+  describe('couponCarousel Function', () => {
+    it('sets props', () => {
+      const state = { prop: 'value' };
+      const action = {
+        type: AT.SET_COUPON_CAROUSEL_PROP,
+        prop: 'prop',
+        value: 'newvalue',
+      };
+      expect(reducers.couponCarousel(state, action).prop).toBe('newvalue');
+    });
+  });
 });
