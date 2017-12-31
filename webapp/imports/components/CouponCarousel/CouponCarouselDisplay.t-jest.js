@@ -9,7 +9,8 @@ import CouponCarouselDisplay from './CouponCarouselDisplay';
 describe('CouponCarouselDisplay.js', () => {
   describe('CouponCarouselDisplay Component', () => {
     let wrapper;
-    beforeEach(() => (wrapper = shallow(<CouponCarouselDisplay />)));
+    const props = { coupons: [{}, {}] };
+    beforeEach(() => (wrapper = shallow(<CouponCarouselDisplay {...props} />)));
     afterEach(() => wrapper.unmount());
     it('renders without error', () => {});
     it('rotates the carousel', () => {

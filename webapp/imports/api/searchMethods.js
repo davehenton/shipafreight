@@ -18,7 +18,11 @@ export const search = (searchText, collection) => {
 
 export const searchAirports = searchtext => search(searchtext, Airports);
 export const searchSeaports = searchtext => search(searchtext, Seaports);
-export const fetchCoupons = () => Coupons.find().fetch();
+export const fetchCoupons = () =>
+  Coupons.find({
+    validFrom: { $lt: new Date() },
+    validTo: { $gt: new Date() },
+  }).fetch();
 
 Meteor.methods({
   'search.airports': searchAirports,

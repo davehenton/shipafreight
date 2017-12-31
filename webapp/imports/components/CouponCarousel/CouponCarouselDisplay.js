@@ -3,35 +3,6 @@ import { CSSTransitionGroup } from 'react-transition-group';
 
 import Coupon from './Coupon';
 
-export const COUPONS = [
-  [
-    {
-      text: 'Quote, Book, Pay and Track Freight Online',
-      type: 'span',
-      className: 'h1',
-      isEndOfLine: true,
-    },
-    {
-      text: 'Get instant quotes when you want them',
-      type: 'span',
-      className: 'h2',
-      isEndOfLine: true,
-    },
-    { text: 'Learn More', type: 'button', link: '/learn-more' },
-  ],
-  [
-    { text: 'Book now and get a ', type: 'span', className: 'h1' },
-    { text: '10%', type: 'span', className: 'h1 orange' },
-    { text: ' discount', type: 'span', className: 'h1', isEndOfLine: true },
-    { text: 'Use code ', type: 'span', className: 'h2' },
-    { text: 'FLAT10', type: 'span', className: 'h2 coupon-code' },
-    { text: ' at checkout', type: 'span', className: 'h2', isEndOfLine: true },
-    { text: 'Offer ends 31', type: 'span', className: 'h3' },
-    { text: 'st', type: 'span', className: 'h3 superscript' },
-    { text: ' December, 2017', type: 'span', className: 'h3' },
-  ],
-];
-
 class CouponCarouselDisplay extends React.Component {
   constructor(props) {
     super(props);
@@ -42,7 +13,7 @@ class CouponCarouselDisplay extends React.Component {
 
   rotateCarousel() {
     let couponIndex = this.state.couponIndex + 1;
-    if (couponIndex === COUPONS.length) {
+    if (couponIndex === this.props.coupons.length) {
       couponIndex = 0;
     }
     this.setState({ couponIndex });
@@ -65,7 +36,7 @@ class CouponCarouselDisplay extends React.Component {
           >
             <Coupon
               key={this.state.couponIndex}
-              coupon={COUPONS[this.state.couponIndex]}
+              coupon={this.props.coupons[this.state.couponIndex]}
             />
           </CSSTransitionGroup>
         </div>

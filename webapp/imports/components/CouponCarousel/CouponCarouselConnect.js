@@ -20,9 +20,25 @@ export const mapDispatchToProps = dispatch => ({
   setCoupons: getDispatcher(dispatch, 'coupons'),
 });
 
+export const DEFAULT_COUPON = [
+  {
+    text: 'Quote, Book, Pay and Track Freight Online',
+    type: 'span',
+    className: 'h1',
+    isEndOfLine: true,
+  },
+  {
+    text: 'Get instant quotes when you want them',
+    type: 'span',
+    className: 'h2',
+    isEndOfLine: true,
+  },
+  { text: 'Learn More', type: 'button', link: '/learn-more' },
+];
+
 // Set coupons to the response
 export const handleCouponsFetchResponse = setCoupons => (err, res) =>
-  res && setCoupons(res);
+  res && setCoupons([DEFAULT_COUPON, ...res.map(coupon => coupon.content)]);
 
 // Fetch coupons if they haven't been fetched before and pass props on to
 // CouponCarouselDisplay
@@ -36,7 +52,11 @@ export const couponFetcher = ({
     Meteor.call('fetch.coupons', handleCouponsFetchResponse(setCoupons));
     setHasFetched(true);
   }
-  return <CouponCarouselDisplay coupons={coupons} />;
+  return (
+    <CouponCarouselDisplay
+      coupons={coupons.length === 0 ? [DEFAULT_COUPON] : coupons}
+    />
+  );
 };
 
 const CouponCarouselConnect = connect(mapStateToProps, mapDispatchToProps)(
