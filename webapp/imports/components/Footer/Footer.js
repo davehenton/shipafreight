@@ -9,17 +9,23 @@ const Footer = props => (
         <div className="list-item">
           <Link to="/">Get a Quote</Link>
         </div>
-        <div className="list-item">View Quotes</div>
+        <div className="list-item">
+          <Link to="/quote">View Quotes</Link>
+        </div>
         <div className="list-item">Quote Tour</div>
       </div>
       <div className="footer-menu-list">
         <div className="list-title">Book</div>
         <div className="list-item">Book Shipment</div>
-        <div className="list-item">View Bookings</div>
+        <div className="list-item">
+          <Link to="/book">View Bookings</Link>
+        </div>
       </div>
       <div className="footer-menu-list">
         <div className="list-title">Track</div>
-        <div className="list-item">Track Shipments</div>
+        <div className="list-item">
+          <Link to="/track">Track Shipments</Link>
+        </div>
       </div>
       <div className="footer-menu-list">
         <div className="list-title">Support</div>
