@@ -60,6 +60,10 @@ describe('CouponCarouselConnect.js', () => {
       props.setHasFetched = jest.fn();
       CCC.couponFetcher(props);
       expect(props.setHasFetched).not.toHaveBeenCalled();
+
+      props.coupons = [{}];
+      CCC.couponFetcher(props);
+      expect(props.setHasFetched).not.toHaveBeenCalled();
     });
   });
 });
