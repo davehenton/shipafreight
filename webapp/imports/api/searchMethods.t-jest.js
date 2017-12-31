@@ -21,4 +21,9 @@ describe('searchMethods.js', () => {
       expect(() => SM.searchSeaports('test')).not.toThrow();
     });
   });
+  describe('fetchCoupons Function', () => {
+    it('does not throw', () => {
+      expect(SM.fetchCoupons).not.toThrow();
+    });
+  });
 });

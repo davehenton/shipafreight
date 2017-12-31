@@ -34,3 +34,9 @@ export const setQuoteFormIsContainerCargo = makeActionCreator(
   AT.SET_QUOTE_FORM_IS_CONTAINER_CARGO,
   'isContainerCargo'
 );
+
+export const setCouponCarouselProp = makeActionCreator(
+  AT.SET_COUPON_CAROUSEL_PROP,
+  'prop',
+  'value'
+);

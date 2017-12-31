@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 
 import Airports from './Airports';
 import Seaports from './Seaports';
+import Coupons from './Coupons';
 import { buildSearchRegExp } from '../components/utils';
 
 export const search = (searchText, collection) => {
@@ -17,8 +18,10 @@ export const search = (searchText, collection) => {
 
 export const searchAirports = searchtext => search(searchtext, Airports);
 export const searchSeaports = searchtext => search(searchtext, Seaports);
+export const fetchCoupons = () => Coupons.find().fetch();
 
 Meteor.methods({
   'search.airports': searchAirports,
   'search.seaports': searchSeaports,
+  'fetch.coupons': fetchCoupons,
 });
