@@ -1,6 +1,7 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import { Meteor } from 'meteor/meteor';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -35,8 +36,8 @@ describe('CouponCarouselConnect.js', () => {
   describe('handleCouponsFetchResponse', () => {
     it('calls setCoupons with the result', () => {
       const setCoupons = jest.fn();
-      CCC.handleCouponsFetchResponse(setCoupons)('err', 'res');
-      expect(setCoupons.mock.calls[0][0]).toBe('res');
+      CCC.handleCouponsFetchResponse(setCoupons)('err', [{ content: [] }]);
+      expect(setCoupons.mock.calls[0][0]).toEqual([CCC.DEFAULT_COUPON, []]);
     });
     it('does not call setCoupons if there is no result', () => {
       const setCoupons = jest.fn();

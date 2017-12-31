@@ -5,12 +5,12 @@ import Adapter from 'enzyme-adapter-react-16';
 Enzyme.configure({ adapter: new Adapter() });
 
 import Coupon, * as C from './Coupon';
-import { COUPONS } from './CouponCarouselDisplay';
+import { DEFAULT_COUPON } from './CouponCarouselConnect';
 
 describe('Coupon.js', () => {
   describe('Coupon Component', () => {
     let wrapper;
-    const props = { coupon: COUPONS[0] };
+    const props = { coupon: DEFAULT_COUPON };
     beforeEach(() => (wrapper = shallow(<Coupon {...props} />)));
     afterEach(() => wrapper.unmount());
     it('renders without error', () => {});
