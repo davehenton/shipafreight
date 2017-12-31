@@ -52,7 +52,11 @@ export const couponFetcher = ({
     Meteor.call('fetch.coupons', handleCouponsFetchResponse(setCoupons));
     setHasFetched(true);
   }
-  return <CouponCarouselDisplay coupons={coupons} />;
+  return (
+    <CouponCarouselDisplay
+      coupons={coupons.length === 0 ? [DEFAULT_COUPON] : coupons}
+    />
+  );
 };
 
 const CouponCarouselConnect = connect(mapStateToProps, mapDispatchToProps)(
