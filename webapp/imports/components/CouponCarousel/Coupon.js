@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-export const CouponSection = ({ type, className, text, isEndOfLine }) => {
+export const CouponSection = ({ type, className, text, link, isEndOfLine }) => {
   switch (type) {
     case 'span':
       return (
@@ -10,7 +11,11 @@ export const CouponSection = ({ type, className, text, isEndOfLine }) => {
         </span>
       );
     case 'button':
-      return <button className={className}>{text}</button>;
+      return (
+        <Link to={link}>
+          <button className={className}>{text}</button>
+        </Link>
+      );
     default:
       return null;
   }

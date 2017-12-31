@@ -1,6 +1,5 @@
 .home {
   color: #333333;
-  padding-top: 80px;
   .instant-quote {
     box-sizing: border-box;
     width: 1200px;
@@ -137,8 +136,6 @@
 }
 @media screen and (max-width: 750px) {
   .home {
-    width: 100%;
-    padding-top: 40px;
     .instant-quote {
       width: 100%;
       padding: 0;

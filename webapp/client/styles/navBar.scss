@@ -43,6 +43,13 @@
   text-decoration: none;
   color: #9d9a96;
 }
+.nav-bar a.active {
+  color: white;
+  background-color: rgb(240, 130, 0);
+}
+.nav-bar a.active .nav-link {
+  font-weight: bold;
+}
 .nav-bar .nav-link.primary {
   background-color: rgb(240, 130, 0);
   color: rgb(172, 121, 121);

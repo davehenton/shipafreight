@@ -28,6 +28,13 @@
 .footer-menu-list {
   width: 200px;
 }
+.footer-menu-list a {
+  color: rgba(white, 0.45);
+  text-decoration: none;
+}
+.footer-menu-list a:hover {
+  color: white;
+}
 .footer-menu .list-title {
   color: white;
   text-transform: uppercase;

@@ -1,11 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = props => (
   <footer className="footer">
     <div className="footer-menu">
       <div className="footer-menu-list">
         <div className="list-title">Quote</div>
-        <div className="list-item">Get a Quote</div>
+        <div className="list-item">
+          <Link to="/">Get a Quote</Link>
+        </div>
         <div className="list-item">View Quotes</div>
         <div className="list-item">Quote Tour</div>
       </div>

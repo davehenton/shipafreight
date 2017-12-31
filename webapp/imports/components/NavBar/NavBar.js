@@ -1,31 +1,32 @@
 import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
 
 const NavBar = props => (
   <div className="nav-bar">
     <div className="nav-bar-inner">
       <div className="nav-bar-left">
-        <a href="/">
+        <Link to="/">
           <div className="brand">
             <img src="agility-logo.png" alt="Agility" />
           </div>
-        </a>
-        <a href="/">
+        </Link>
+        <NavLink to="/quote">
           <div className="nav-link">Quote</div>
-        </a>
-        <a href="/">
+        </NavLink>
+        <NavLink to="/book">
           <div className="nav-link">Book</div>
-        </a>
-        <a href="/">
+        </NavLink>
+        <NavLink to="/track">
           <div className="nav-link">Track</div>
-        </a>
+        </NavLink>
       </div>
       <div className="nav-bar-right">
-        <a href="/">
-          <div className="nav-link">Login</div>
-        </a>
-        <a href="/">
-          <div className="nav-link primary">Sign Up</div>
-        </a>
+        <NavLink to="/log-in">
+          <div className="nav-link">Log In</div>
+        </NavLink>
+        <NavLink to="/sign-up">
+          <div className="nav-link">Sign Up</div>
+        </NavLink>
       </div>
     </div>
   </div>
