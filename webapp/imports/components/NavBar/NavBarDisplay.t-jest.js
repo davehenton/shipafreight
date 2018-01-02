@@ -9,7 +9,8 @@ import NavBarDisplay from './NavBarDisplay';
 describe('NavBarDisplay.js', () => {
   describe('NavBarDisplay Component', () => {
     let wrapper;
-    beforeEach(() => (wrapper = shallow(<NavBarDisplay />)));
+    const props = { toggleMenu: jest.fn() };
+    beforeEach(() => (wrapper = shallow(<NavBarDisplay {...props} />)));
     afterEach(() => wrapper.unmount());
     it('renders without error', () => {});
   });

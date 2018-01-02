@@ -17,8 +17,6 @@ describe('HouseholdGoodsModalConnect.js', () => {
   describe('getOk Function', () => {
     it('dispatches set quote form prop action', () => {
       const dispatch = jest.fn();
-      const index = 0;
-      const prop = '';
       HGMC.getOk(dispatch)();
       const action = dispatch.mock.calls[0][0];
       expect(action.type).toBe(AT.SET_QUOTE_FORM_PROP);
