@@ -7,12 +7,11 @@ import {
   syncTranslationWithStore,
 } from 'react-redux-i18n';
 import thunk from 'redux-thunk';
-import { BrowserRouter } from 'react-router-dom';
-import { Route } from 'react-router';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 import reducers from '../../state/reducers';
 import translationsObject from '../../i18n/translations';
-import NavBar from '../NavBar/NavBar';
+import NavBar from '../NavBar';
 import Home from '../Home/Home';
 import LearnMore from '../LearnMore';
 import ViewQuotes from '../ViewQuotes';
@@ -46,7 +45,7 @@ const App = () => (
   <Provider store={store}>
     <BrowserRouter>
       <div>
-        <NavBar />
+        <Route path="/" component={NavBar} />
         <div className="page">
           <Route path="/" exact component={Home} />
           <Route path="/learn-more" exact component={LearnMore} />
