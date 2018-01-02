@@ -4,6 +4,7 @@ describe('Quote Form Defaults', function() {
   let b;
   beforeAll(async function() {
     b = browser;
+    await b.setViewportSize({ width: 1200, height: 1200 });
     await b.url('http://localhost:3000');
   });
   it('defaults mode of transport to Ocean', async function() {

@@ -26,9 +26,10 @@ describe('Coupon.js', () => {
       wrapper.setProps({ type: 'span' });
       expect(wrapper.name()).toBe('span');
     });
-    it('renders a button if type is button', () => {
+    it('renders a button inside a Link if type is button', () => {
       wrapper.setProps({ type: 'button' });
-      expect(wrapper.name()).toBe('button');
+      expect(wrapper.name()).toBe('Link');
+      expect(wrapper.children().name()).toBe('button');
     });
     it('renders an end of line div if isEndOfLine is true', () => {
       wrapper.setProps({ type: 'span', isEndOfLine: true });

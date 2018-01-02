@@ -206,9 +206,19 @@ export const couponCarousel = (
   }
 };
 
+export const navBar = (state = { isMenuOpen: false }, action) => {
+  switch (action.type) {
+    case AT.SET_NAV_BAR_PROP:
+      return _.set(action.prop, action.value, state);
+    default:
+      return state;
+  }
+};
+
 const reducers = combineReducers({
   quoteForm,
   couponCarousel,
+  navBar,
   i18n: i18nReducer,
 });
 

@@ -40,3 +40,9 @@ export const setCouponCarouselProp = makeActionCreator(
   'prop',
   'value'
 );
+
+export const setNavBarProp = makeActionCreator(
+  AT.SET_NAV_BAR_PROP,
+  'prop',
+  'value'
+);

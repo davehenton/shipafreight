@@ -4,12 +4,13 @@ import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-import NavBar from './NavBar';
+import NewBooking from './index';
 
-describe('NavBar.js', () => {
-  describe('NavBar Component', () => {
+describe('NewBooking.js', () => {
+  describe('NewBooking Component', () => {
     let wrapper;
-    beforeEach(() => (wrapper = shallow(<NavBar />)));
+    const props = { coupons: [{}, {}] };
+    beforeEach(() => (wrapper = shallow(<NewBooking {...props} />)));
     afterEach(() => wrapper.unmount());
     it('renders without error', () => {});
   });

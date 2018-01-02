@@ -10,16 +10,60 @@
   border-bottom: 1px solid #e2e1e1;
   z-index: 1030;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 .nav-bar-inner {
   display: flex;
   justify-content: space-between;
   width: 1200px;
 }
+.nav-bar-menu {
+  display: none;
+  left: 0;
+  flex-direction: column;
+  position: absolute;
+  top: 47px;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgb(245, 245, 245);
+  border-bottom: 1px solid #e2e1e1;
+}
 .nav-bar-left,
 .nav-bar-right {
   display: flex;
+}
+.nav-bar .hamburger {
+  display: none;
+  background-color: transparent;
+  box-shadow: none;
+  position: relative;
+  padding: 13px 10px;
+  width: 42px;
+}
+.nav-bar .hamburger-inner {
+  display: block;
+  position: absolute;
+}
+.nav-bar .hamburger-inner,
+.nav-bar .hamburger-inner::before,
+.nav-bar .hamburger-inner::after {
+  width: 22px;
+  height: 2px;
+  background-color: #9d9a96;
+  border-radius: 4px;
+}
+.nav-bar .hamburger-inner::before {
+  position: absolute;
+  bottom: 5px;
+  content: '';
+  display: block;
+}
+.nav-bar .hamburger-inner::after {
+  position: absolute;
+  bottom: -5px;
+  content: '';
+  display: block;
 }
 .nav-bar .brand {
   padding: 12px 15px;
@@ -27,13 +71,20 @@
   background-color: white;
   margin-right: 50px;
 }
-.nav-bar .nav-link {
+.nav-bar .nav-link,
+.nav-bar .mobile-nav-link {
   line-height: 49px;
   text-transform: uppercase;
   width: 100px;
   text-align: center;
   font-weight: 400;
   font-size: 16px;
+}
+.nav-bar .mobile-nav-link {
+  text-align: left;
+  padding-left: 15px;
+  width: 100%;
+  box-sizing: border-box;
 }
 .nav-bar a,
 .nav-bar a:visited,
@@ -42,6 +93,14 @@
 .nav-bar a:hover {
   text-decoration: none;
   color: #9d9a96;
+}
+.nav-bar a.active {
+  color: white;
+}
+.nav-bar a.active .nav-link,
+.nav-bar a.active .mobile-nav-link {
+  font-weight: bold;
+  background-color: rgb(240, 130, 0);
 }
 .nav-bar .nav-link.primary {
   background-color: rgb(240, 130, 0);
@@ -53,13 +112,20 @@
   .nav-bar-inner {
     width: 100vw;
   }
-  .nav-bar-inner {
-    // display: none;
+  .nav-bar-menu {
+    display: block;
+  }
+  .nav-bar-menu.hide {
+    display: none;
   }
   .nav-bar .brand {
-    padding: 12px 15px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 2px;
-    background-color: white;
-    margin-right: 50px;
+    padding: 5px 15px;
+    box-shadow: none;
+  }
+  .nav-bar .nav-link {
+    display: none;
+  }
+  .nav-bar .hamburger {
+    display: inline-block;
   }
 }

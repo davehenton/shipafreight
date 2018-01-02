@@ -218,4 +218,15 @@ describe('reducers.js', () => {
       expect(reducers.couponCarousel(state, action).prop).toBe('newvalue');
     });
   });
+  describe('navBar Function', () => {
+    it('sets props', () => {
+      const state = { prop: 'value' };
+      const action = {
+        type: AT.SET_NAV_BAR_PROP,
+        prop: 'prop',
+        value: 'newvalue',
+      };
+      expect(reducers.navBar(state, action).prop).toBe('newvalue');
+    });
+  });
 });
