@@ -16,8 +16,13 @@ import NavBar from '../NavBar/NavBar';
 import Home from '../Home/Home';
 import LearnMore from '../LearnMore';
 import ViewQuotes from '../ViewQuotes';
+import QuoteTour from '../QuoteTour';
+import NewBooking from '../NewBooking';
 import ViewBookings from '../ViewBookings';
 import TrackShipments from '../TrackShipments';
+import QuickGuide from '../QuickGuide';
+import DocumentList from '../DocumentList';
+import CO2Facts from '../CO2Facts';
 import LogIn from '../LogIn';
 import SignUp from '../SignUp';
 import Footer from '../Footer/Footer';
@@ -46,8 +51,13 @@ const App = () => (
           <Route path="/" exact component={Home} />
           <Route path="/learn-more" exact component={LearnMore} />
           <Route path="/quote" exact component={ViewQuotes} />
+          <Route path="/quote/tour" exact component={QuoteTour} />
+          <Route path="/book/new" exact component={NewBooking} />
           <Route path="/book" exact component={ViewBookings} />
           <Route path="/track" exact component={TrackShipments} />
+          <Route path="/quick-guide" exact component={QuickGuide} />
+          <Route path="/document-list" exact component={DocumentList} />
+          <Route path="/co2-facts" exact component={CO2Facts} />
           <Route path="/log-in" exact component={LogIn} />
           <Route path="/sign-up" exact component={SignUp} />
           <Footer />
