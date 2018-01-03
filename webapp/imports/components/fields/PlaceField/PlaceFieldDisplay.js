@@ -12,9 +12,6 @@ export function onSearchBoxMounted(ref) {
 
 export function onPlacesChanged() {
   const places = this.state.refs.searchBox.getPlaces();
-  this.props.onSearchTextChanged({
-    target: { value: places[0].formatted_address },
-  });
   this.props.onChange(places[0]);
 }
 
