@@ -11,6 +11,10 @@ describe('Location Fields', function() {
   });
 
   const checkFirstOption = async function(input, output) {
+    await b.setValue(selector, '');
+    await b.waitUntil(async function() {
+      return !await b.isExisting('.pac-item');
+    }, 10000);
     await b.setValue(selector, input);
     await b.waitForVisible('.pac-item', 10000);
     await b.click('.pac-item');
@@ -31,6 +35,10 @@ describe('Location Fields', function() {
         '957 sirus trail',
         '957 Sirus Trail, Sarasota, FL 34232, USA'
       );
+      await checkFirstOption(
+        'munchensteinerstrasse 274A',
+        'Münchensteinerstrasse 274A, 4053 Basel, Switzerland'
+      );
     },
     30000
   );
@@ -38,7 +46,9 @@ describe('Location Fields', function() {
     'finds cities',
     async function() {
       await checkFirstOption('basel', 'Basel, Switzerland');
+      await checkFirstOption('zurich', 'Zürich, Switzerland');
       await checkFirstOption('sarasota', 'Sarasota, FL, USA');
+      await checkFirstOption('kuwait city', 'Kuwait City, Kuwait');
     },
     30000
   );
@@ -46,7 +56,9 @@ describe('Location Fields', function() {
     'finds regions',
     async function() {
       await checkFirstOption('st gallen', 'St Gallen, Switzerland');
+      await checkFirstOption('vallais swit', 'Valais, Switzerland');
       await checkFirstOption('florida', 'Florida, USA');
+      await checkFirstOption('bavaria', 'Bavaria, Germany');
     },
     30000
   );
@@ -55,6 +67,8 @@ describe('Location Fields', function() {
     async function() {
       await checkFirstOption('switz', 'Switzerland');
       await checkFirstOption('russ', 'Russia');
+      await checkFirstOption('united a', 'United Arab Emirates');
+      await checkFirstOption('united s', 'United States');
     },
     30000
   );
