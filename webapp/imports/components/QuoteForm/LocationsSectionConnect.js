@@ -21,6 +21,9 @@ export const getPrimaryPortMessage = (
   isContainerCargo,
   portMappings
 ) => {
+  if (!portMappings) {
+    return '';
+  }
   let message = '';
   if (modeOfTransport === 'Air') {
     message = `Primary airport: ${portMappings.airports[0]}`;
