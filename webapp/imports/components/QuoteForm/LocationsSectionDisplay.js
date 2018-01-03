@@ -6,7 +6,7 @@ import AsyncOptionField from '../fields/AsyncOptionField';
 const LocationsSectionDisplay = props => {
   const ORIGIN_LOCATION_FIELDS = {
     LOCATION: (
-      <div className="field location">
+      <div id="pickup-location" className="field location">
         <div className="field-wrapper">
           <div className="field-label">* Pickup location</div>
           <PlaceField

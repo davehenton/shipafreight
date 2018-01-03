@@ -134,7 +134,7 @@ export const getSetPickupLocation = dispatch => googlePlace => {
 };
 
 export const getSetDeliveryLocation = dispatch => val => {
-  dispatch(setQuoteFormProp('deliveryLocation', val.formatted_address));
+  // dispatch(setQuoteFormProp('deliveryLocation', val.formatted_address));
   const req = getLocationMapsRequest(val);
   if (req) {
     Meteor.call(
