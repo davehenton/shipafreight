@@ -15,6 +15,6 @@ ratings:
   - "**.js"
   - "**.jsx"
 exclude_paths: 
-- "*.t-jest.js"
-- "*.test.js"
+- "**/*.t-jest.js"
+- "**/*.test.js"
 - "/webapp/imports/i18n/*"
