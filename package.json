@@ -5,7 +5,8 @@
   "scripts": {
     "unit": "jest --config=jest.config.json --runInBand",
     "watch": "jest --config=jest.config.json --watchAll --runInBand",
-    "unit-ci": "jest --config=jest.config.json --coverage --runInBand",
+    "unit-ci":
+      "jest --config=jest.config.json --coverage --runInBand --verbose",
     "acceptance-ci":
       "chimp --browser=phantomjs --ddp=http://localhost:3000 --jasmine --path=tests/acceptance",
     "cover": "jest --config=jest.config.json --coverage",
