@@ -11,8 +11,11 @@ describe('Location Fields', function() {
   });
 
   const checkFirstOption = async function(input, output) {
-    await b.setValue(selector, '');
     await b.waitUntil(async function() {
+      await b.setValue(selector, '');
+      await b.setValue(selector, ' ');
+      await b.click('#ocean-button');
+      await b.click(selector);
       return !await b.isExisting('.pac-item');
     }, 10000);
     await b.setValue(selector, input);

@@ -1,0 +1,54 @@
+.quote-list-item {
+  width: 1200px;
+  border-top: 2px solid #f08200;
+  box-shadow: 0 0 25px 2px rgba(0, 0, 0, 0.1);
+  padding: 15px 30px;
+  background-color: white;
+  box-sizing: border-box;
+  margin-bottom: 35px;
+  .section {
+    border-bottom: 1px solid #ddd;
+    margin-top: 15px;
+  }
+  .section:first-child {
+    margin-top: 0;
+  }
+  .section:last-child {
+    border-bottom: none;
+  }
+  .row {
+    display: flex;
+    justify-content: space-between;
+  }
+  .col-3 {
+    flex-basis: 25%;
+  }
+  .data-element {
+    min-height: 70px;
+  }
+  .label {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  .value {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .link-group {
+    display: flex;
+    padding-bottom: 15px;
+  }
+  .link {
+    color: #f08200;
+    font-size: 14px;
+  }
+  .link::after {
+    content: '|';
+    margin: 0 4px;
+    font-size: 16px;
+  }
+  .link:last-child::after {
+    content: '';
+  }
+}
