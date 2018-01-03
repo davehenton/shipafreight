@@ -21,21 +21,19 @@ export const getPrimaryPortMessage = (
   isContainerCargo,
   portMappings
 ) => {
-  if (!portMappings) {
-    return '';
-  }
+  let message = '';
   if (modeOfTransport === 'Air') {
-    return `Primary airport: ${portMappings.airports[0]}`;
+    message = `Primary airport: ${portMappings.airports[0]}`;
   }
   if (modeOfTransport === 'Ocean' && isContainerCargo) {
-    return `Primary seaport: ${portMappings.seaports[0]}`;
+    message = `Primary seaport: ${portMappings.seaports[0]}`;
   }
   if (modeOfTransport === 'Ocean' && !isContainerCargo) {
-    return `Primary container freight station: ${
+    message = `Primary container freight station: ${
       portMappings.containerFreightStations[0]
     }`;
   }
-  return '';
+  return message;
 };
 
 export const mapStateToProps = ({
