@@ -13,12 +13,24 @@ describe('PlaceFieldConnect.js', () => {
       );
     });
   });
+  describe('getOnSearchTextChanged Function', () => {
+    it('returns a function that extracts e.target.value and passes it to the passed function', () => {
+      const fn = jest.fn();
+      const e = { target: { value: 'a' } };
+      PFC.getOnSearchTextChanged(fn)(e);
+      expect(fn).toHaveBeenLastCalledWith('a');
+    });
+  });
   describe('mapStateToProps Function', () => {
     it('maps state to props', () => {
-      expect(PFC.mapStateToProps({ i18n: { locale: 'a' } })).toEqual({
-        googleMapURL:
-          'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCcQFaLHUxSRI0uDJQN6eJn7yb0aoZAjEc&language=a',
-      });
+      expect(
+        PFC.mapStateToProps(
+          { i18n: { locale: 'a' } },
+          { getOnSearchTextChanged: jest.fn() }
+        ).googleMapURL
+      ).toBe(
+        'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCcQFaLHUxSRI0uDJQN6eJn7yb0aoZAjEc&language=a'
+      );
     });
   });
   describe('mapDispatchToProps Function', () => {

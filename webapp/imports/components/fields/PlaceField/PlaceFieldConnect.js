@@ -9,9 +9,11 @@ const URL_PREFIX =
 export const getLocale = state => state.i18n.locale;
 export const getGoogleMapURL = state =>
   `${URL_PREFIX}&key=${API_KEY}&language=${getLocale(state)}`;
+export const getOnSearchTextChanged = fn => e => fn(e.target.value);
 
 export const mapStateToProps = (state, ownProps) => ({
   googleMapURL: getGoogleMapURL(state),
+  onSearchTextChanged: getOnSearchTextChanged(ownProps.onSearchTextChanged),
 });
 
 export const mapDispatchToProps = (dispatch, ownProps) => ({});

@@ -8,7 +8,11 @@ class CouponCarouselDisplay extends React.Component {
     super(props);
     this.state = { couponIndex: 0 };
     this.rotateCarousel = this.rotateCarousel.bind(this);
-    setTimeout(this.rotateCarousel, 4000);
+    this.rotateTimeout = setTimeout(this.rotateCarousel, 4000);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.rotateTimeout);
   }
 
   rotateCarousel() {

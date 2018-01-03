@@ -1,5 +1,9 @@
 .home {
+  background: url(../quotes-landing-bg.jpg) center top no-repeat;
+  // background-size: cover;
   color: #333333;
+  padding-top: 80px;
+  width: 100%;
   .instant-quote {
     box-sizing: border-box;
     width: 1200px;
@@ -136,6 +140,7 @@
 }
 @media screen and (max-width: 750px) {
   .home {
+    padding-top: 40px;
     .instant-quote {
       width: 100%;
       padding: 0;

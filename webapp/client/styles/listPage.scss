@@ -1,0 +1,55 @@
+.list-page {
+  width: 1200px;
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .header .title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  .header .search-box {
+    margin-top: 30px;
+    position: relative;
+    width: 40%;
+  }
+  .header .search-box::before {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 0;
+    top: 9px;
+    content: '';
+    background: url(../ag-sprite_sheet.svg) no-repeat -82px -98px;
+  }
+  .header .search-box input {
+    background-color: transparent;
+    border-bottom: 1px solid #ccc;
+    padding: 0 40px;
+    height: 40px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .header .search-box .cancel-icon {
+    content: '';
+    background: url(../ag-sprite_sheet.svg) no-repeat -799px -95px;
+    position: absolute;
+    right: 0;
+    top: 6px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
+  .footer::before {
+    background-color: #f6f6f6;
+  }
+}

@@ -36,6 +36,8 @@ export const InnerComponent = props => (
       className="input place-field"
       placeholder=""
       spellCheck="false"
+      value={props.value}
+      onChange={props.onSearchTextChanged}
     />
   </StandaloneSearchBox>
 );

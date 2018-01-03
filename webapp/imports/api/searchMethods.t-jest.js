@@ -1,6 +1,7 @@
 import { Mongo } from 'meteor/mongo';
 
 import * as SM from './searchMethods';
+import LocationMaps from './LocationMaps';
 
 describe('searchMethods.js', () => {
   describe('search Function', () => {
@@ -24,6 +25,19 @@ describe('searchMethods.js', () => {
   describe('fetchCoupons Function', () => {
     it('does not throw', () => {
       expect(SM.fetchCoupons).not.toThrow();
+    });
+  });
+  describe('searchLocationMaps Function', () => {
+    it('does not throw on any code path', () => {
+      LocationMaps.docs = [{}];
+      expect(() => SM.searchLocationMaps({ postalCode: 1 })).not.toThrow();
+      expect(() => SM.searchLocationMaps({ region: 1 })).not.toThrow();
+      expect(() => SM.searchLocationMaps({})).not.toThrow();
+
+      LocationMaps.docs = [];
+      expect(() => SM.searchLocationMaps({ postalCode: 1 })).not.toThrow();
+      expect(() => SM.searchLocationMaps({ region: 1 })).not.toThrow();
+      expect(() => SM.searchLocationMaps({})).not.toThrow();
     });
   });
 });

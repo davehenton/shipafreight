@@ -4,13 +4,12 @@ import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-import ViewQuotes from './index';
+import LocationsSectionDisplay from './LocationsSectionDisplay';
 
-describe('ViewQuotes.js', () => {
-  describe('ViewQuotes Component', () => {
+describe('LocationsSectionDisplay.js', () => {
+  describe('LocationsSectionDisplay Component', () => {
     let wrapper;
-    const props = { coupons: [{}, {}] };
-    beforeEach(() => (wrapper = shallow(<ViewQuotes {...props} />)));
+    beforeEach(() => (wrapper = shallow(<LocationsSectionDisplay />)));
     afterEach(() => wrapper.unmount());
     it('renders without error', () => {});
   });

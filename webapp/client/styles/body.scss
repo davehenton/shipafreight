@@ -2,11 +2,10 @@
 
 body {
   font-family: 'Open Sans', sans-serif;
-  background: url(../quotes-landing-bg.jpg) center fixed no-repeat;
-  background-size: cover;
   margin: 0;
   padding: 0;
   overflow-y: auto;
+  min-height: 100vh;
 }
 
 .hide {

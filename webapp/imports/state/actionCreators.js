@@ -46,3 +46,9 @@ export const setNavBarProp = makeActionCreator(
   'prop',
   'value'
 );
+
+export const setViewQuotesProp = makeActionCreator(
+  AT.SET_VIEW_QUOTES_PROP,
+  'prop',
+  'value'
+);

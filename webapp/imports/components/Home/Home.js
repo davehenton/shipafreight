@@ -2,6 +2,7 @@ import React from 'react';
 
 import CouponCarousel from '../CouponCarousel';
 import QuoteForm from '../QuoteForm';
+import Footer from '../Footer/Footer';
 
 const Home = () => (
   <div className="home">
@@ -9,6 +10,7 @@ const Home = () => (
       <CouponCarousel />
       <QuoteForm />
     </div>
+    <Footer />
   </div>
 );
 

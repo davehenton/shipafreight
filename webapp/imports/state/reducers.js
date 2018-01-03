@@ -136,10 +136,12 @@ const QUOTE_FORM_DEFAULT_STATE = {
   originCity: '',
   originPort: '',
   originAirport: '',
+  pickupLocation: '',
   destinationCountry: '',
   destinationCity: '',
   destinationPort: '',
   destinationAirport: '',
+  deliveryLocation: '',
   cargoRows: [PACKAGE_ROW_DEFAULT_STATE],
   isContainerCargo: false,
   description: '',
@@ -194,31 +196,35 @@ export const quoteForm = (
   }
 };
 
-export const couponCarousel = (
-  state = { hasFetched: false, coupons: [] },
+export const makeSimpleReducer = (setPropActionType, defaultState) => (
+  state = defaultState,
   action
 ) => {
   switch (action.type) {
-    case AT.SET_COUPON_CAROUSEL_PROP:
+    case setPropActionType:
       return _.set(action.prop, action.value, state);
     default:
       return state;
   }
 };
 
-export const navBar = (state = { isMenuOpen: false }, action) => {
-  switch (action.type) {
-    case AT.SET_NAV_BAR_PROP:
-      return _.set(action.prop, action.value, state);
-    default:
-      return state;
-  }
-};
+export const couponCarousel = makeSimpleReducer(AT.SET_COUPON_CAROUSEL_PROP, {
+  hasFetched: false,
+  coupons: [],
+});
+export const navBar = makeSimpleReducer(AT.SET_NAV_BAR_PROP, {
+  isMenuOpen: false,
+});
+export const viewQuotes = makeSimpleReducer(AT.SET_VIEW_QUOTES_PROP, {
+  searchText: '',
+  activeTab: 'ACTIVE',
+});
 
 const reducers = combineReducers({
   quoteForm,
   couponCarousel,
   navBar,
+  viewQuotes,
   i18n: i18nReducer,
 });
 

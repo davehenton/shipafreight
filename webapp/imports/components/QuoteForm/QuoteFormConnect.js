@@ -16,18 +16,6 @@ import HouseholdGoodsModal from '../HouseholdGoodsModal';
 // class
 export const getActiveClass = (prop, value) => (prop === value ? 'active' : '');
 
-// Use a location if it is Door to * movement, and port/airport otherwise
-export const getOriginLocationField = (modeOfTransport, movementType) =>
-  movementType === 'DOOR_TO_DOOR' || movementType === 'DOOR_TO_PORT'
-    ? 'LOCATION'
-    : modeOfTransport === 'Ocean' ? 'PORT' : 'AIRPORT';
-
-// Use a location if it is * to Door movement, and port/airport otherwise
-export const getDestinationLocationField = (modeOfTransport, movementType) =>
-  movementType === 'DOOR_TO_DOOR' || movementType === 'PORT_TO_DOOR'
-    ? 'LOCATION'
-    : modeOfTransport === 'Ocean' ? 'PORT' : 'AIRPORT';
-
 export const getCargoRows = (cargoRows, isContainerCargo) =>
   isContainerCargo
     ? cargoRows.map((_, index) => <ContainerRow key={index} index={index} />)
@@ -76,11 +64,6 @@ export const mapStateToProps = ({
   ...quoteForm,
   oceanButtonClass: getActiveClass(modeOfTransport, 'Ocean'),
   airButtonClass: getActiveClass(modeOfTransport, 'Air'),
-  originLocationField: getOriginLocationField(modeOfTransport, movementType),
-  destinationLocationField: getDestinationLocationField(
-    modeOfTransport,
-    movementType
-  ),
   isHazardousClass: getActiveClass(isHazardous, true),
   isHouseholdGoodsClass: getActiveClass(isHouseholdGoods, true),
   isInsuranceRequiredClass: getActiveClass(isInsuranceRequired, true),
@@ -127,14 +110,6 @@ export const mapDispatchToProps = dispatch => ({
   ),
   setModeToAir: getPresetValueDispatcher(dispatch, 'modeOfTransport')('Air'),
   setMovementType: getDispatcher(dispatch, 'movementType'),
-  setOriginCountry: getDispatcher(dispatch, 'originCountry'),
-  setDepartureAirport: getDispatcher(dispatch, 'departureAirport'),
-  setDepartureSeaport: getDispatcher(dispatch, 'departureSeaport'),
-  setPickupLocation: getDispatcher(dispatch, 'pickupLocation'),
-  setDestinationCountry: getDispatcher(dispatch, 'destinationCountry'),
-  setArrivalAirport: getDispatcher(dispatch, 'arrivalAirport'),
-  setArrivalSeaport: getDispatcher(dispatch, 'arrivalSeaport'),
-  setDeliveryLocation: getDispatcher(dispatch, 'deliveryLocation'),
   setPackageType: getDispatcher(dispatch, 'packageType'),
   setQuantity: getDispatcher(dispatch, 'quantity'),
   setDimensionsUOM: getDispatcher(dispatch, 'dimensionsUOM'),

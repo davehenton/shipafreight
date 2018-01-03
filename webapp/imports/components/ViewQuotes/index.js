@@ -1,5 +1,3 @@
-import React from 'react';
-
-const ViewQuotes = () => <div>View Quotes!</div>;
-
+import ViewQuotesConnect from './ViewQuotesConnect';
+const ViewQuotes = ViewQuotesConnect;
 export default ViewQuotes;

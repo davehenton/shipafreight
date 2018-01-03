@@ -15,34 +15,6 @@ describe('QuoteFormConnect.js', () => {
       expect(QFC.getActiveClass(1, 2)).toBe('');
     });
   });
-  describe('getOriginLocationField Function', () => {
-    it('returns location if it is Door to * and port/airport otherwise', () => {
-      expect(QFC.getOriginLocationField('Air', 'DOOR_TO_DOOR')).toBe(
-        'LOCATION'
-      );
-      expect(QFC.getOriginLocationField('Air', 'DOOR_TO_PORT')).toBe(
-        'LOCATION'
-      );
-      expect(QFC.getOriginLocationField('Ocean', 'PORT_TO_DOOR')).toBe('PORT');
-      expect(QFC.getOriginLocationField('Air', 'PORT_TO_DOOR')).toBe('AIRPORT');
-    });
-  });
-  describe('getDestinationLocationField Function', () => {
-    it('returns location if it is * to Door and port/airport otherwise', () => {
-      expect(QFC.getDestinationLocationField('Air', 'DOOR_TO_DOOR')).toBe(
-        'LOCATION'
-      );
-      expect(QFC.getDestinationLocationField('Air', 'PORT_TO_DOOR')).toBe(
-        'LOCATION'
-      );
-      expect(QFC.getDestinationLocationField('Ocean', 'DOOR_TO_PORT')).toBe(
-        'PORT'
-      );
-      expect(QFC.getDestinationLocationField('Air', 'PORT_TO_PORT')).toBe(
-        'AIRPORT'
-      );
-    });
-  });
   describe('getCargoRows Function', () => {
     it('returns ContainerRows if container cargo and PackageRows otherwise', () => {
       expect(QFC.getCargoRows([{}], true)[0].type.displayName).toBe(

@@ -59,7 +59,6 @@ const App = () => (
           <Route path="/co2-facts" exact component={CO2Facts} />
           <Route path="/log-in" exact component={LogIn} />
           <Route path="/sign-up" exact component={SignUp} />
-          <Footer />
         </div>
       </div>
     </BrowserRouter>
